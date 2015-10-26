@@ -1,18 +1,20 @@
-package miw.ast;
+package miw.ast.statements;
+
+import miw.ast.expressions.Expression;
 
 import java.util.List;
 
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
-public class Writing implements Statement {
+public class Reading implements Statement {
     public List<Expression> expressions;
     public Integer line, column;
 
-    public Writing(Integer line, Integer column, List<Expression> expressions) {
+    public Reading(Integer line, Integer column, List<Expression> expressions) {
         this.expressions = expressions;
-        this.column = column;
         this.line = line;
+        this.column = column;
     }
 
     public Integer getLine() {
@@ -29,9 +31,8 @@ public class Writing implements Statement {
         for (Expression expression: expressions){
             s += expression;
             if (!(expressions.indexOf(expression) == expressions.size()-1))
-                s += ",";
+                    s += ",";
         }
-        return "write " + s;
-
+        return "read " + s;
     }
 }

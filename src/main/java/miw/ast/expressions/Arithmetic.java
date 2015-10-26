@@ -1,4 +1,4 @@
-package miw.ast;
+package miw.ast.expressions;
 
 /**
  * Created by mvidalgarcia on 26/10/15.

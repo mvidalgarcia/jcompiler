@@ -1,4 +1,6 @@
-package miw.ast;
+package miw.ast.statements;
+
+import miw.ast.expressions.Expression;
 
 /**
  * Created by mvidalgarcia on 26/10/15.

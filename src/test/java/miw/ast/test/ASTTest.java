@@ -1,11 +1,14 @@
 package miw.ast.test;
 
 import miw.ast.*;
+import miw.ast.expressions.*;
+import miw.ast.statements.Assignment;
+import miw.ast.statements.Reading;
+import miw.ast.statements.Statement;
+import miw.ast.statements.Writing;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.*;

@@ -23,4 +23,14 @@ public class Reading implements Statement {
         return column;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (Expression expression: expressions){
+            s += expression;
+            if (!(expressions.indexOf(expression) == expressions.size()-1))
+                    s += ",";
+        }
+        return "read " + s;
+    }
 }

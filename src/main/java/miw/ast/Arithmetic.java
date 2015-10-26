@@ -25,4 +25,9 @@ public class Arithmetic implements Expression {
     public Integer getColumn() {
         return column;
     }
+
+    @Override
+    public String toString() {
+        return "("+firstExpression+operator+secondExpression+")";
+    }
 }

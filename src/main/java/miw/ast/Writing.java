@@ -22,4 +22,16 @@ public class Writing implements Statement {
     public Integer getColumn() {
         return column;
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (Expression expression: expressions){
+            s += expression;
+            if (!(expressions.indexOf(expression) == expressions.size()-1))
+                s += ",";
+        }
+        return "write " + s;
+
+    }
 }

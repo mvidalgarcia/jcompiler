@@ -22,4 +22,10 @@ public class Assignment implements Statement {
     public Integer getColumn() {
         return column;
     }
+
+
+    @Override
+    public String toString() {
+        return left_expression+" = "+right_expression;
+    }
 }

@@ -21,4 +21,9 @@ public class UnaryMinus implements Expression {
     public Integer getColumn() {
         return column;
     }
+
+    @Override
+    public String toString() {
+        return "-"+expression;
+    }
 }

@@ -39,14 +39,14 @@ public int getColumn() {
 // ************  Patterns (macros) ********************
 Letter = [a-zA-Z]
 Digit = [0-9]
-IntegerConstant = {Digit}*
 StringConstant = \"~\"
+IntegerConstant = {Digit}*
 DoubleConstant = ({Digit}+\.?{Digit}*|{Digit}*\.?{Digit}+)([eE]-?{Digit}+)?
-Identifier = {Letter}({Letter}|{Digit})*
-LineComment = "//".*\n
+Identifier = {Letter}({Letter}|{Digit}|_)*
+LineComment = "//".*
 MultipleLineComment = "/*"~"*/" // ~ -> any string of values
 EndLine = \r\n | \n\r | \r | \n
-Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t]
+Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t\f]
 
 %%
 // ************  Actions ********************
@@ -56,8 +56,8 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t]
 
 // Reserved words
 
-"main"		{parser.setYylval(yytext()); return Parser.MAIN; }
-"int"		{parser.setYylval(yytext()); return Parser.INT;  }
+"main"		{ parser.setYylval(yytext()); return Parser.MAIN; }
+"int"		{ parser.setYylval(yytext()); return Parser.INT;  }
 "while"		{ parser.setYylval(yytext()); return Parser.WHILE; }
 "if"		{ parser.setYylval(yytext()); return Parser.IF; }
 "else"		{ parser.setYylval(yytext()); return Parser.ELSE; }
@@ -67,14 +67,8 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t]
 "void"		{ parser.setYylval(yytext()); return Parser.VOID; }
 
 
-// * Integer constant
-{IntegerConstant}	{ parser.setYylval(new Integer(yytext())); return Parser.CTE_INTEGER; }
-
-// * Double (optional)
-{DoubleConstant} {parser.setYylval(new Double(yytext())); return Parser.CTE_DOUBLE; }
-
 // * String constant
-{StringConstant}	{parser.setYylval(new String(yytext())); return Parser.CTE_STRING; }
+{StringConstant}	{parser.setYylval(yytext().replace("\"", "")); return Parser.CTE_STRING; }
 
 // * Operators lenght 2
 "=="	{parser.setYylval(yytext()); return Parser.EQUAL; }
@@ -103,6 +97,12 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t]
 ")"	|
 "{"	|
 "}"		{ parser.setYylval(yytext()); return (int)yycharat(0); }
+
+// * Integer constant
+{IntegerConstant}	{ parser.setYylval(new Integer(yytext())); return Parser.CTE_INTEGER; }
+
+// * Double (optional)
+{DoubleConstant} {parser.setYylval(new Double(yytext())); return Parser.CTE_DOUBLE; }
 
 
 // * Identifiers

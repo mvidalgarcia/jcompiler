@@ -1,10 +1,14 @@
  //hello
  int mifuncion() {}
+ blue_box = "done"
+ name = "peter_griffin"
  a = '\126'; // Must work
  // b = 'abc'; // Must not work
  3a = "hello"; // Must not work - Fail!
  c = 'z';
  v[10] = 2e-32;
  a = 2e23;
+ x= 32 - 8
+ y=-3.4
 
  varchar = 'ee'

@@ -24,4 +24,8 @@ public class ErrorHandler {
     public boolean addError (TypeError error){
         return this.errors.add(error);
     }
+
+    public boolean areErrors() {
+        return errors.size() > 0;
+    }
 }

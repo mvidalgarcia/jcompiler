@@ -31,13 +31,17 @@ public class Main {
         Parser parser = new Parser(lexico);
         int token;
         while ((token=lexico.yylex()) != 0) {
-            System.out.println("Line: "+lexico.getLine()+", column: "+lexico.getColumn()+", token: "+token+", semantic value: "+parser.getYylval()+".");
+            System.out.println("Line: "+lexico.getLine()+", column: "+lexico.getColumn()+", token: "+token+", semantic value: "+parser.getYylval());
         }
 
-         /*  Print errors */
-        for (TypeError error: ErrorHandler.getInstance().errors) {
-            System.err.println(error);
+        /*  Print errors */
+        if (ErrorHandler.getInstance().areErrors()) {
+            for (TypeError error : ErrorHandler.getInstance().errors) {
+                System.err.println(error);
+            }
         }
+
+
 
     }
 }

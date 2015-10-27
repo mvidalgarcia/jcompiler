@@ -15,6 +15,7 @@ public class Parser {
     public final static int CTE_CHARACTER = 258;
     public final static int CTE_STRING = 273;
     public final static int IDENTIFIER = 274;
+    public final static int CTE_DOUBLE = 275;
 
     public final static int MAIN = 259;
     public final static int VOID = 260;

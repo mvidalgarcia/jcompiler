@@ -16,7 +16,7 @@ import miw.error.TypeError;
 
 %{
 // ************  Attributes and methods ********************
-// * Syntactic Analizer
+// * Syntactic Analyzer
 private Parser parser;
 public void setParser(Parser parser) {
 	this.parser = parser;
@@ -41,6 +41,7 @@ Letter = [a-zA-Z]
 Digit = [0-9]
 IntegerConstant = {Digit}*
 StringConstant = \"~\"
+DoubleConstant = ({Digit}+\.?{Digit}*|{Digit}*\.?{Digit}+)([eE]-?{Digit}+)?
 Identifier = {Letter}({Letter}|{Digit})*
 LineComment = "//".*\n
 MultipleLineComment = "/*"~"*/" // ~ -> any string of values
@@ -68,6 +69,9 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t]
 
 // * Integer constant
 {IntegerConstant}	{ parser.setYylval(new Integer(yytext())); return Parser.CTE_INTEGER; }
+
+// * Double (optional)
+{DoubleConstant} {parser.setYylval(new Double(yytext())); return Parser.CTE_DOUBLE; }
 
 // * String constant
 {StringConstant}	{parser.setYylval(new String(yytext())); return Parser.CTE_STRING; }
@@ -102,16 +106,14 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t]
 
 
 // * Identifiers
-{Identifier}	{parser.setYylval(new String(yytext())); return Parser.IDENTIFIER; }
-
-// * Double (optional)
+{Identifier}	{parser.setYylval(yytext()); return Parser.IDENTIFIER; }
 
 // * Characters
 '.'		{parser.setYylval(new Character(yycharat(1))); return Parser.CTE_CHARACTER; }
 '\\t'	{parser.setYylval(new Character(yycharat(1))); return new Character('\t'); }
 '\\n'	{parser.setYylval(new Character(yycharat(1))); return new Character('\n'); }
 // Ascii chars
-'\\{Digit}+' {parser.setYylval(yytext()); return Parser.CTE_CHARACTER; }
+'\\{Digit}+' {parser.setYylval((char)Integer.parseInt(yytext().replace("\\", "").replace("\'", ""))); return Parser.CTE_CHARACTER; }
 
 // . -> anything
 .		{ new TypeError(getLine(), getColumn(), yycharat(0)+""); }

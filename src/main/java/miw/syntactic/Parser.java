@@ -345,18 +345,18 @@ final static String yyrule[] = {
 "vector_declaration : DOUBLE '[' CTE_INTEGER ']' IDENTIFIER",
 };
 
-//#line 76 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 77 "../src/main/java/miw/syntactic/syntactic.y"
 
 /**
-* Referencia al analizador léxico
+* Lexical analyzer reference
 */
 private Lexical lexico;
 /**
-* Referencia al ast
+* AST reference
 */
 public ASTNode ast;
 
-// * Llamada al analizador léxico
+// * Lexical analyzer call
 private int yylex () {
     int token=0;
     try { 
@@ -368,30 +368,30 @@ private int yylex () {
     return token;
 }
 
-// * Manejo de Errores Sintácticos
+// * Syntactic error handling
 public void yyerror (String error) {
 	// Usar manejador de errores
-    System.err.println ("Error Sintáctico en línea " + lexico.getLine()+
-		" y columna "+lexico.getColumn()+":\n\t"+error);
+    System.err.println ("Syntactic error in line " + lexico.getLine()+
+		", column "+lexico.getColumn()+":\n\t"+error);
 }
 
-// * Constructor del Sintáctico
+// * Syntactic constructor
 public Parser(Lexical lexico) {
 	this.lexico = lexico;
 	lexico.setParser(this);
 }
 
-// * El yyparse original no es público
+// * The original yyparse is not public
 public int parse() {
 	return yyparse();
 }
 
-// * El yylval no es un atributo público
+// * yylval is not a public attribute
 public void setYylval(Object yylval) {
 	this.yylval=yylval;
 }
 
-// * El yylval no es un atributo público
+// * yylval is not a public attribute
 public Object getYylval() {
 	return this.yylval;
 }

@@ -1,0 +1,19 @@
+write a ;
+read x ;
+a = -4 + a / 4 * 5 - x ;
+b = 2 ;
+int i,e;
+double j;
+j = -((i-e)/2);
+int[10] v;
+write j, v[i];
+
+int i,e;
+double j;
+int[10] v;
+
+void main() {
+  read i,e;
+  j = -((i-e)/2);
+  write j, v[i];
+}

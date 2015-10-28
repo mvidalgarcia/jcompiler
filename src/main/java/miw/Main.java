@@ -27,12 +27,16 @@ public class Main {
             return;
         }
 
+
         Lexical lexico = new Lexical(fr);
         Parser parser = new Parser(lexico);
-        int token;
-        while ((token=lexico.yylex()) != 0) {
-            System.out.println("Line: "+lexico.getLine()+", column: "+lexico.getColumn()+", token: "+token+", semantic value: "+parser.getYylval());
-        }
+//        int token;
+//        while ((token=lexico.yylex()) != 0) {
+//            System.out.println("Line: "+lexico.getLine()+", column: "+lexico.getColumn()+", token: "+token+", semantic value: "+parser.getYylval());
+//        }
+
+        // Parse!
+        parser.run();
 
         /*  Print errors */
         if (ErrorHandler.getInstance().areErrors()) {

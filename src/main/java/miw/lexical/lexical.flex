@@ -56,7 +56,6 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t\f]
 
 // Reserved words
 
-"main"		{ parser.setYylval(yytext()); return Parser.MAIN; }
 "int"		{ parser.setYylval(yytext()); return Parser.INT;  }
 "while"		{ parser.setYylval(yytext()); return Parser.WHILE; }
 "if"		{ parser.setYylval(yytext()); return Parser.IF; }
@@ -65,6 +64,11 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t\f]
 "char"		{ parser.setYylval(yytext()); return Parser.CHAR; }
 "return"	{ parser.setYylval(yytext()); return Parser.RETURN; }
 "void"		{ parser.setYylval(yytext()); return Parser.VOID; }
+"read"		{ parser.setYylval(yytext()); return Parser.READ; }
+"write"		{ parser.setYylval(yytext()); return Parser.WRITE; }
+"main"		{ parser.setYylval(yytext()); return Parser.MAIN; }
+
+
 
 
 // * String constant

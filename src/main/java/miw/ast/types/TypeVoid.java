@@ -1,11 +1,12 @@
 package miw.ast.types;
 
+import miw.ast.AbstractASTNode;
+
 /**
  * Created by mvidalgarcia on 28/10/15.
  */
-public class TypeVoid implements Type {
+public class TypeVoid extends AbstractASTNode implements Type {
     private static TypeVoid instance;
-    public Integer line, column;
     private TypeVoid(){}
 
     public TypeVoid getInstance(){
@@ -15,11 +16,4 @@ public class TypeVoid implements Type {
         return instance;
     }
 
-    public Integer getLine() {
-        return line;
-    }
-
-    public Integer getColumn() {
-        return column;
-    }
 }

@@ -1,11 +1,12 @@
 package miw.ast.types;
 
+import miw.ast.AbstractASTNode;
+
 /**
  * Created by mvidalgarcia on 28/10/15.
  */
-public class TypeInteger implements Type {
+public class TypeInteger extends AbstractASTNode implements Type {
     private static TypeInteger instance;
-    public Integer line, column;
     private TypeInteger(){}
 
     public TypeInteger getInstance(){
@@ -15,11 +16,4 @@ public class TypeInteger implements Type {
         return instance;
     }
 
-    public Integer getLine() {
-        return line;
-    }
-
-    public Integer getColumn() {
-        return column;
-    }
 }

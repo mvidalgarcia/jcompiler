@@ -1,14 +1,13 @@
 package miw.ast.types;
 
 import miw.ast.ASTNode;
+import miw.ast.AbstractASTNode;
 import miw.error.ErrorHandler;
 
 /**
  * Created by mvidalgarcia on 27/10/15.
  */
-public class TypeError implements Type {
-    public Integer line;
-    public Integer column;
+public class TypeError extends AbstractASTNode implements Type {
     public String description;
     public ASTNode astNode;
 
@@ -26,11 +25,4 @@ public class TypeError implements Type {
                 ", character \'" + description + "\' unknown.";
     }
 
-    public Integer getLine() {
-        return line;
-    }
-
-    public Integer getColumn() {
-        return column;
-    }
 }

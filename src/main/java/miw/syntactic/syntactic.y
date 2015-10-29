@@ -19,6 +19,7 @@ import java.util.*;
 %right '='
 %left '+' '-'
 %left '*' '/'
+%nonassoc '[' ']'
 %nonassoc '(' ')'
 
 

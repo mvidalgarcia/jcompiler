@@ -1,11 +1,12 @@
 package miw.ast.types;
 
+import miw.ast.AbstractASTNode;
+
 /**
  * Created by mvidalgarcia on 28/10/15.
  */
-public class TypeDouble implements Type {
+public class TypeDouble extends AbstractASTNode implements Type {
     private static TypeDouble instance;
-    public Integer line, column;
     private TypeDouble(){}
 
     public TypeDouble getInstance(){
@@ -15,11 +16,4 @@ public class TypeDouble implements Type {
         return instance;
     }
 
-    public Integer getLine() {
-        return line;
-    }
-
-    public Integer getColumn() {
-        return column;
-    }
 }

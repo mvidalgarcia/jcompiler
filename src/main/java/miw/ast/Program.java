@@ -1,6 +1,7 @@
 package miw.ast;
 
 import miw.ast.statements.Statement;
+import miw.ast.statements.VarDefinition;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,9 +12,11 @@ import java.util.List;
  */
 public class Program {
     public List<Statement> statements;
+    public List<VarDefinition> varDefinitions;
 
-    public Program(List<Statement> statements) {
+    public Program(List<Statement> statements, List<VarDefinition> varDefinitions) {
         this.statements = statements;
+        this.varDefinitions = varDefinitions;
     }
 
     @Override

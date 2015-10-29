@@ -1,13 +1,14 @@
 package miw.ast.expressions;
 
+import miw.ast.AbstractASTNode;
+
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
-public class Arithmetic implements Expression {
+public class Arithmetic extends AbstractASTNode implements Expression {
     public Expression firstExpression;
     public Expression secondExpression;
     public String operator;
-    public Integer line, column;
 
     public Arithmetic(Integer line, Integer column, Expression firstExpression,
                       String operator, Expression secondExpression) {
@@ -16,14 +17,6 @@ public class Arithmetic implements Expression {
         this.operator = operator;
         this.line = line;
         this.column = column;
-    }
-
-    public Integer getLine() {
-        return line;
-    }
-
-    public Integer getColumn() {
-        return column;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package miw;
 
 import miw.error.ErrorHandler;
-import miw.error.TypeError;
+import miw.ast.types.TypeError;
 import miw.lexical.Lexical;
 import miw.syntactic.Parser;
 

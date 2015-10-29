@@ -36,7 +36,7 @@ expression: '(' expression ')'
          | expression '*' expression
          | expression '/' expression
          | IDENTIFIER
-         | CTE_INTEGER
+         | CTE_INTEGER //{ System.out.println((Integer)$1); }
          | '-' CTE_INTEGER
          | CTE_DOUBLE
          | '-' CTE_DOUBLE

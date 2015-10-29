@@ -2,7 +2,7 @@
 
 package miw.lexical;
 import miw.syntactic.Parser;
-import miw.error.TypeError;
+import miw.ast.types.TypeError;
 
 %%
 // ************  Options ********************

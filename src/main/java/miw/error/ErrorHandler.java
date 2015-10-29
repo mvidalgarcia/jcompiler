@@ -1,5 +1,7 @@
 package miw.error;
 
+import miw.ast.types.TypeError;
+
 import java.util.ArrayList;
 import java.util.List;
 

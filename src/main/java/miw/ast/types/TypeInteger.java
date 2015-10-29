@@ -11,11 +11,15 @@ public class TypeInteger extends AbstractASTNode implements Type {
         super(line, column);
     }
 
-    public TypeInteger getInstance(Integer line, Integer column){
+    public static TypeInteger getInstance(Integer line, Integer column){
         if (instance == null) {
             instance = new TypeInteger(line, column);
         }
         return instance;
     }
 
+    @Override
+    public String toString() {
+        return "TypeInteger{}";
+    }
 }

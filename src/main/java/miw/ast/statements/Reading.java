@@ -18,6 +18,12 @@ public class Reading extends AbstractASTNode implements Statement {
 
     @Override
     public String toString() {
+        return "Reading{" +
+                "expressions=" + expressions +
+                '}';
+    }
+
+    public String toStringMod() {
         String s = "";
         for (Expression expression: expressions){
             s += expression;

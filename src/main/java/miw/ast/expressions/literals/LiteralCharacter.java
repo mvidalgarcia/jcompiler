@@ -1,6 +1,7 @@
-package miw.ast.expressions;
+package miw.ast.expressions.literals;
 
 import miw.ast.AbstractASTNode;
+import miw.ast.expressions.Expression;
 
 /**
  * Created by mvidalgarcia on 26/10/15.

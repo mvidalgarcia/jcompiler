@@ -10,6 +10,7 @@ public abstract class AbstractASTNode implements ASTNode{
         this.line = line;
         this.column = column;
     }
+    public AbstractASTNode() {}
 
     public Integer getLine() {
         return line;

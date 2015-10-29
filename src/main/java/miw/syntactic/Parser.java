@@ -21,9 +21,14 @@ package miw.syntactic;
 
 import miw.lexical.Lexical;
 import miw.ast.*;
+import miw.ast.expressions.*;
+import miw.ast.expressions.literals.*;
+import miw.ast.statements.*;
+import miw.ast.statements.definitions.*;
+import miw.ast.types.*;
 import java.util.*;
 
-//#line 23 "Parser.java"
+//#line 28 "Parser.java"
 
 
 
@@ -154,139 +159,134 @@ final Object dup_yyval(Object val)
 //#### end semantic value section ####
 public final static short CTE_INTEGER=257;
 public final static short CTE_CHARACTER=258;
-public final static short CTE_STRING=259;
+public final static short CTE_CHAR=259;
 public final static short CTE_DOUBLE=260;
-public final static short IDENTIFIER=261;
-public final static short MAIN=262;
-public final static short VOID=263;
-public final static short INT=264;
-public final static short DOUBLE=265;
-public final static short CHAR=266;
-public final static short IF=267;
-public final static short ELSE=268;
-public final static short WHILE=269;
-public final static short RETURN=270;
-public final static short EQUAL=271;
-public final static short LTE=272;
-public final static short GTE=273;
-public final static short NOTEQUAL=274;
-public final static short AND=275;
-public final static short OR=276;
-public final static short READ=277;
-public final static short WRITE=278;
+public final static short CTE_STRING=261;
+public final static short IDENTIFIER=262;
+public final static short MAIN=263;
+public final static short VOID=264;
+public final static short INT=265;
+public final static short DOUBLE=266;
+public final static short CHAR=267;
+public final static short IF=268;
+public final static short ELSE=269;
+public final static short WHILE=270;
+public final static short RETURN=271;
+public final static short EQUAL=272;
+public final static short LTE=273;
+public final static short GTE=274;
+public final static short NOTEQUAL=275;
+public final static short AND=276;
+public final static short OR=277;
+public final static short READ=278;
+public final static short WRITE=279;
+public final static short UNARYMINUS=280;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-    3,    3,    3,    2,    5,    4,    4,    6,    6,    1,
-    1,    7,    7,    7,    7,    7,    7,    7,    8,    8,
-    8,    8,
+    0,    1,    1,    3,    5,    5,    4,    4,    4,    4,
+    2,    6,    6,    7,    7,    7,    9,    9,    8,    8,
+    8,    8,    8,    8,    8,    8,    8,   10,   10,   10,
 };
 final static short yylen[] = {                            2,
-    2,    3,    4,    3,    3,    3,    3,    1,    1,    2,
-    1,    2,    1,    7,    1,    4,    4,    1,    3,    2,
-    3,    3,    2,    2,    2,    2,    2,    1,    0,    5,
-    5,    5,
+    2,    2,    0,    3,    1,    3,    1,    1,    1,    4,
+    7,    2,    3,    3,    2,    2,    1,    3,    1,    1,
+    3,    3,    3,    3,    2,    4,    3,    1,    1,    1,
 };
-final static short yydefred[] = {                         0,
-    9,   11,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,   13,    0,   28,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   10,   12,    0,    0,
-    0,    1,    0,    0,    0,    0,    0,    0,   20,    0,
-    0,    0,    0,    0,    0,    0,    2,    0,   21,    0,
-    0,    0,    6,    7,   16,   17,    0,    0,    0,    0,
-    3,    0,   30,   32,   31,    0,    0,    0,    0,   14,
+final static short yydefred[] = {                         3,
+    0,    0,    0,    7,    9,    8,    1,    2,    0,    0,
+    5,    0,    0,    0,    0,    4,    0,    0,   10,    6,
+    0,   28,   30,   29,   19,    0,    0,    0,    0,    0,
+    0,    0,   20,    0,    0,    0,    0,    0,   11,    0,
+   12,    0,    0,    0,    0,    0,    0,    0,   27,   13,
+    0,    0,    0,    0,    0,    0,    0,   26,
 };
-final static short yydgoto[] = {                         11,
-   12,   32,   19,   14,   69,   20,   15,   16,
+final static short yydgoto[] = {                          1,
+    2,    7,    8,    9,   13,   30,   31,   32,   35,   33,
 };
-final static short yysindex[] = {                       -30,
-    0,    0,  -83,  -28,  -18,  -16,   -8,   -8,  -38,   -8,
-    0,  -40,  -36,    0,  -39,    0, -231, -236,   56,  -13,
- -222,  -13, -221,  -13,  -13,  -13,    0,    0,   -8,   41,
- -209,    0,   -4,   -8,   -8,   -8,   -8,   -8,    0,  -37,
-  -29,  -23,   -8,  -19,   -6,   49,    0,   25,    0,   56,
-  -24,  -24,    0,    0,    0,    0, -204,   56, -192, -176,
-    0,   48,    0,    0,    0,  -21,  -30,  -30,  -32,    0,
+final static short yysindex[] = {                         0,
+    0, -177, -261,    0,    0,    0,    0,    0,  -90,  -37,
+    0, -251,  -33,  -34,  -83,    0, -250, -104,    0,    0,
+  -36,    0,    0,    0,    0,  -32,  -32,  -32,  -32,  -40,
+  -29,   39,    0,   33,   -9,   -9,  -55,   16,    0,  -22,
+    0,  -32,  -32,  -32,  -32,  -32,  -32,  -32,    0,    0,
+   33,   22,   22,  -55,  -55,  -14,   33,    0,
 };
-final static short yyrindex[] = {                        45,
-    0,    0,    7,    0,    0,    0,    0,    0,    0,    0,
-    0,   45,    0,    0,    0,    0,    0,    0,  -31,   46,
-    0,   47,    0,   50,   51,   52,    0,    0,    0,    0,
+final static short yyrindex[] = {                         0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,   53,
-   17,   36,    0,    0,    0,    0,    0,  -25,    0,    0,
-    0,    0,    0,    0,    0,    0,   45,  -58,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,   -6,  -19,   12,  -27,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+   15,    6,   11,  -20,    1,    0,   24,    0,
 };
 final static short yygindex[] = {                         0,
-   33,    0,    4,    0,    0,   38,   -9,    0,
+    0,    0,    0,    0,    0,    0,   61,   89,   65,    0,
 };
-final static int YYTABLESIZE=253;
+final static int YYTABLESIZE=243;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                         10,
-   29,   29,   33,   13,    9,   37,   35,   17,   36,   10,
-   38,   10,   18,   30,    9,   13,    9,   37,   19,   39,
-   42,   10,   38,   10,   34,   40,    9,   18,    9,   41,
-   43,   10,   46,   19,   44,   45,    9,   50,   51,   52,
-   53,   54,   22,   24,   25,   26,   58,    8,    8,    8,
-    8,    8,   48,    8,   49,   55,   63,    4,   33,    4,
-    4,    4,   18,   56,   62,    8,   15,    8,   64,   57,
-   13,   13,   21,   59,   23,    4,    5,    4,    5,    5,
-    5,   47,   37,   35,   65,   36,   60,   38,   66,   61,
-   37,   35,   70,   36,    5,   38,    5,   37,   35,   68,
-   36,   67,   38,   29,   25,   27,    0,    0,   26,   24,
-   23,   22,    0,    0,    0,    0,    0,    0,    0,    0,
+yytable = new short[]{                         29,
+   12,   10,   14,   29,   28,   15,   18,   29,   28,   19,
+   17,   20,   28,   25,   25,   25,   25,   25,   21,   25,
+   23,   23,   23,   23,   23,   16,   23,   45,   43,   41,
+   44,   25,   46,   25,   48,   47,   50,   17,   23,   16,
+   23,   24,   24,   24,   24,   24,   21,   24,   21,   21,
+   21,   22,   17,   22,   22,   22,   49,   45,   43,   24,
+   44,   24,   46,   45,   21,   25,   21,   18,   46,   22,
+   15,   22,   23,   14,   45,   43,   47,   44,   58,   46,
+   45,   43,   18,   44,   39,   46,    3,    4,    5,    6,
+   40,   36,    0,   24,    0,    0,    0,    0,   21,   42,
+    0,    0,    0,   22,    0,    0,   47,    0,    0,    0,
+    0,    0,   47,    0,   34,   34,   37,   38,    0,    0,
+    0,    0,    0,   47,    0,    0,    0,    0,    0,   47,
+   51,   52,   53,   54,   55,   56,   57,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,   11,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    1,    0,   27,    2,
-    3,   28,   31,    4,    5,    6,    1,    0,    1,    2,
-    3,    2,    3,    4,    5,    6,    7,    8,    1,    0,
-    1,    2,    3,    2,    3,    0,    7,    8,    1,    0,
-    0,    2,    3,
+    0,    0,    0,    0,    0,    0,   22,    0,   23,   24,
+   22,   25,   23,   24,   22,   25,   23,   24,    0,   25,
+    0,    0,    0,    0,    0,    0,    0,   26,   27,    0,
+    0,   26,   27,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                         40,
-   59,   40,   12,    0,   45,   42,   43,   91,   45,   40,
-   47,   40,   44,   10,   45,   12,   45,   42,   44,   59,
-  257,   40,   47,   40,   61,  257,   45,   59,   45,  261,
-   44,   40,   29,   59,  257,  257,   45,   34,   35,   36,
-   37,   38,    5,    6,    7,    8,   43,   41,   42,   43,
-   44,   45,  262,   47,   59,   93,  261,   41,   68,   43,
-   44,   45,   91,   93,   40,   59,  125,   61,  261,   93,
-   67,   68,   91,   93,   91,   59,   41,   61,   43,   44,
-   45,   41,   42,   43,  261,   45,   93,   47,   41,   41,
-   42,   43,  125,   45,   59,   47,   61,   42,   43,   67,
-   45,  123,   47,   59,   59,   59,   -1,   -1,   59,   59,
-   59,   59,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   91,  263,   40,   40,   45,  257,   41,   40,   45,   93,
+   44,  262,   45,   41,   42,   43,   44,   45,  123,   47,
+   41,   42,   43,   44,   45,   59,   47,   42,   43,   59,
+   45,   59,   47,   61,   44,   91,   59,   44,   59,   59,
+   61,   41,   42,   43,   44,   45,   41,   47,   43,   44,
+   45,   41,   59,   43,   44,   45,   41,   42,   43,   59,
+   45,   61,   47,   42,   59,   93,   61,   44,   47,   59,
+   59,   61,   93,   59,   42,   43,   91,   45,   93,   47,
+   42,   43,   59,   45,  125,   47,  264,  265,  266,  267,
+   30,   27,   -1,   93,   -1,   -1,   -1,   -1,   93,   61,
+   -1,   -1,   -1,   93,   -1,   -1,   91,   -1,   -1,   -1,
+   -1,   -1,   91,   -1,   26,   27,   28,   29,   -1,   -1,
+   -1,   -1,   -1,   91,   -1,   -1,   -1,   -1,   -1,   91,
+   42,   43,   44,   45,   46,   47,   48,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,  262,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,  257,   -1,  257,  260,
-  261,  260,  263,  264,  265,  266,  257,   -1,  257,  260,
-  261,  260,  261,  264,  265,  266,  277,  278,  257,   -1,
-  257,  260,  261,  260,  261,   -1,  277,  278,  257,   -1,
-   -1,  260,  261,
+   -1,   -1,   -1,   -1,   -1,   -1,  257,   -1,  259,  260,
+  257,  262,  259,  260,  257,  262,  259,  260,   -1,  262,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,  278,  279,   -1,
+   -1,  278,  279,
 };
 }
-final static short YYFINAL=11;
-final static short YYMAXTOKEN=278;
+final static short YYFINAL=1;
+final static short YYMAXTOKEN=280;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
@@ -305,47 +305,45 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,"CTE_INTEGER","CTE_CHARACTER",
-"CTE_STRING","CTE_DOUBLE","IDENTIFIER","MAIN","VOID","INT","DOUBLE","CHAR","IF",
-"ELSE","WHILE","RETURN","EQUAL","LTE","GTE","NOTEQUAL","AND","OR","READ",
-"WRITE",
+"CTE_CHAR","CTE_DOUBLE","CTE_STRING","IDENTIFIER","MAIN","VOID","INT","DOUBLE",
+"CHAR","IF","ELSE","WHILE","RETURN","EQUAL","LTE","GTE","NOTEQUAL","AND","OR",
+"READ","WRITE","UNARYMINUS",
 };
 final static String yyrule[] = {
 "$accept : program",
-"program : statements main",
-"expression : '(' expression ')'",
-"expression : '-' '(' expression ')'",
-"expression : expression '+' expression",
-"expression : expression '-' expression",
-"expression : expression '*' expression",
-"expression : expression '/' expression",
-"expression : IDENTIFIER",
-"expression : CTE_INTEGER",
-"expression : '-' CTE_INTEGER",
-"expression : CTE_DOUBLE",
-"expression : '-' CTE_DOUBLE",
-"expression : vector_access",
-"main : VOID MAIN '(' ')' '{' main_content '}'",
-"main_content : statements",
-"vector_access : IDENTIFIER '[' CTE_INTEGER ']'",
-"vector_access : IDENTIFIER '[' IDENTIFIER ']'",
-"expressions : expression",
-"expressions : expressions ',' expression",
+"program : var_defs main",
+"var_defs : var_defs var_def",
+"var_defs :",
+"var_def : type ids ';'",
+"ids : IDENTIFIER",
+"ids : ids ',' IDENTIFIER",
+"type : INT",
+"type : CHAR",
+"type : DOUBLE",
+"type : type '[' CTE_INTEGER ']'",
+"main : VOID MAIN '(' ')' '{' statements '}'",
 "statements : statement ';'",
 "statements : statements statement ';'",
 "statement : expression '=' expression",
 "statement : WRITE expressions",
 "statement : READ expressions",
-"statement : INT expressions",
-"statement : CHAR expressions",
-"statement : DOUBLE expressions",
-"statement : vector_declaration",
-"vector_declaration :",
-"vector_declaration : INT '[' CTE_INTEGER ']' IDENTIFIER",
-"vector_declaration : CHAR '[' CTE_INTEGER ']' IDENTIFIER",
-"vector_declaration : DOUBLE '[' CTE_INTEGER ']' IDENTIFIER",
+"expressions : expression",
+"expressions : expressions ',' expression",
+"expression : IDENTIFIER",
+"expression : ctes",
+"expression : expression '+' expression",
+"expression : expression '-' expression",
+"expression : expression '*' expression",
+"expression : expression '/' expression",
+"expression : '-' expression",
+"expression : expression '[' expression ']'",
+"expression : '(' expression ')'",
+"ctes : CTE_INTEGER",
+"ctes : CTE_DOUBLE",
+"ctes : CTE_CHAR",
 };
 
-//#line 77 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 112 "../src/main/java/miw/syntactic/syntactic.y"
 
 /**
 * Lexical analyzer reference
@@ -395,7 +393,7 @@ public void setYylval(Object yylval) {
 public Object getYylval() {
 	return this.yylval;
 }
-//#line 335 "Parser.java"
+//#line 333 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -549,6 +547,145 @@ boolean doaction;
     switch(yyn)
       {
 //########## USER-SUPPLIED ACTIONS ##########
+case 1:
+//#line 37 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Definition> list_defs = (List<Definition>) val_peek(1);
+                          Definition main = (FunctionDef) val_peek(0);
+                          list_defs.add(main);
+                          ast = new Program(lexico.getLine(), lexico.getColumn(), list_defs); System.out.println(ast);}
+break;
+case 2:
+//#line 42 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<VariableDef> var_defs = (List<VariableDef>)val_peek(1);
+                             List<VariableDef> var_def = (List<VariableDef>)val_peek(0);
+                             var_defs.addAll(var_def); yyval = var_defs; }
+break;
+case 3:
+//#line 45 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new ArrayList<VariableDef>(); }
+break;
+case 4:
+//#line 49 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Identifier> identifiers = (List<Identifier>) val_peek(1);
+                                 List<VariableDef> var_defs = new ArrayList<VariableDef>();
+                                 for (Identifier identifier: identifiers) {
+                                    var_defs.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)val_peek(2), identifier));
+                                 }
+                                 yyval = var_defs;}
+break;
+case 5:
+//#line 57 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Identifier> list = new ArrayList<Identifier>();
+                       list.add(new Identifier(lexico.getLine(), lexico.getColumn(), (String)val_peek(0))); yyval = list; }
+break;
+case 6:
+//#line 59 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Identifier> list = (List<Identifier>) val_peek(2);
+                               Identifier identifier = new Identifier(lexico.getLine(), lexico.getColumn(), (String)val_peek(0));
+                               for (Identifier id: list) {
+                                    if (id.name.equals(identifier.name)) {
+                               			yyerror("Variable already defined.");
+                               			throw new RuntimeException();
+                               		}
+                               }
+                               list.add(identifier); yyval = list;}
+break;
+case 7:
+//#line 70 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = TypeInteger.getInstance(lexico.getLine(), lexico.getColumn()); }
+break;
+case 8:
+//#line 71 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = TypeChar.getInstance(lexico.getLine(), lexico.getColumn()); }
+break;
+case 9:
+//#line 72 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = TypeDouble.getInstance(lexico.getLine(), lexico.getColumn());}
+break;
+case 10:
+//#line 73 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new TypeArray(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(1), (Type) val_peek(3)); }
+break;
+case 11:
+//#line 76 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new FunctionDef(lexico.getLine(), lexico.getColumn(),
+                                                TypeVoid.getInstance(lexico.getLine(), lexico.getColumn()),
+                                                new Identifier(lexico.getLine(), lexico.getColumn(), "main"),
+                                                (List<Statement>) val_peek(1)); }
+break;
+case 12:
+//#line 81 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Statement> list = new ArrayList<Statement>(); list.add((Statement) val_peek(1)); yyval = list; }
+break;
+case 13:
+//#line 82 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Statement> list = (List<Statement>) val_peek(2); list.add((Statement) val_peek(1)); yyval = list; }
+break;
+case 14:
+//#line 85 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Assignment(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), (Expression) val_peek(0)); }
+break;
+case 15:
+//#line 86 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Writing(lexico.getLine(), lexico.getColumn(), (List) val_peek(0)); }
+break;
+case 16:
+//#line 87 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Reading(lexico.getLine(), lexico.getColumn(), (List) val_peek(0)); }
+break;
+case 17:
+//#line 91 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Expression> list = new ArrayList<Expression>(); list.add((Expression) val_peek(0)); yyval = list; }
+break;
+case 18:
+//#line 92 "../src/main/java/miw/syntactic/syntactic.y"
+{ List<Expression> list = (List<Expression>)val_peek(2); list.add((Expression) val_peek(0)); yyval = list; }
+break;
+case 19:
+//#line 95 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Identifier(lexico.getLine(), lexico.getColumn(), (String) val_peek(0)); }
+break;
+case 21:
+//#line 97 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "+", (Expression) val_peek(0)); }
+break;
+case 22:
+//#line 98 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "-", (Expression) val_peek(0)); }
+break;
+case 23:
+//#line 99 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "*", (Expression) val_peek(0)); }
+break;
+case 24:
+//#line 100 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "/", (Expression) val_peek(0)); }
+break;
+case 25:
+//#line 101 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new UnaryMinus(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(0)); }
+break;
+case 26:
+//#line 102 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new ArrayAccess (lexico.getLine(), lexico.getColumn(), (Expression) val_peek(3), (Expression) val_peek(1)); }
+break;
+case 27:
+//#line 103 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = val_peek(1); }
+break;
+case 28:
+//#line 107 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new LiteralInteger(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(0)); }
+break;
+case 29:
+//#line 108 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new LiteralDouble(lexico.getLine(), lexico.getColumn(), (Double) val_peek(0)); }
+break;
+case 30:
+//#line 109 "../src/main/java/miw/syntactic/syntactic.y"
+{ yyval = new LiteralCharacter(lexico.getLine(), lexico.getColumn(), (Character)val_peek(0)); }
+break;
+//#line 620 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

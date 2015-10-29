@@ -18,6 +18,13 @@ public class Assignment extends AbstractASTNode implements Statement {
 
     @Override
     public String toString() {
+        return "Assignment{" +
+                "left_expression=" + left_expression +
+                ", right_expression=" + right_expression +
+                '}';
+    }
+
+    public String toStringMod() {
         return left_expression+" = "+right_expression;
     }
 }

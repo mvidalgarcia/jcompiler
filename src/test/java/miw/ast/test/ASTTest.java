@@ -2,6 +2,7 @@ package miw.ast.test;
 
 import miw.ast.*;
 import miw.ast.expressions.*;
+import miw.ast.expressions.literals.LiteralInteger;
 import miw.ast.statements.Assignment;
 import miw.ast.statements.Reading;
 import miw.ast.statements.Statement;
@@ -29,21 +30,21 @@ public class ASTTest {
     public Program buildTree() {
         /* First line of code */
         List<Expression> expressions = new ArrayList<Expression>();
-        expressions.add(new Variable(1, 6, "a"));
-        expressions.add(new Variable(1, 8, "b"));
+        expressions.add(new Identifier(1, 6, "a"));
+        expressions.add(new Identifier(1, 8, "b"));
         Statement firstLine = new Reading(1, 1, expressions);
 
         /* Second line of code */
-        Expression leftExpression = new Variable(2, 1, "a");
+        Expression leftExpression = new Identifier(2, 1, "a");
         Expression rightExpression = new Arithmetic(2, 13,
                 new Arithmetic(2, 11,
                         new Arithmetic(2, 8,
-                                new UnaryMinus(2, 6, new Variable(2, 7, "b")),
+                                new UnaryMinus(2, 6, new Identifier(2, 7, "b")),
                                 "+",
                                 new LiteralInteger(2, 9, 3)
                         ),
                         "*",
-                        new Variable(2, 12, "c")
+                        new Identifier(2, 12, "c")
                 ),
                 "/",
                 new LiteralInteger(2, 14, 2)
@@ -52,9 +53,9 @@ public class ASTTest {
 
         /* Third line of code */
         expressions = new ArrayList<Expression>();
-        expressions.add(new Variable(3, 7, "a"));
+        expressions.add(new Identifier(3, 7, "a"));
         expressions.add(new Arithmetic(3, 10,
-                new Variable(3, 9, "c"),
+                new Identifier(3, 9, "c"),
                 "*",
                 new LiteralInteger(3, 11, 2)
         ));
@@ -65,9 +66,10 @@ public class ASTTest {
         statements.add(firstLine);
         statements.add(thirdLine);
         statements.add(secondLine);
-        Program program = new Program(statements);
+        //Program program = new Program(0, 0, null, statements);
 
-        return program;
+        //return program;
+        return null;
     }
 
     public String myFirstTest(){

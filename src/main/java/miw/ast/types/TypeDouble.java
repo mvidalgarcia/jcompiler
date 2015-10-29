@@ -11,11 +11,15 @@ public class TypeDouble extends AbstractASTNode implements Type {
         super(line, column);
     }
 
-    public TypeDouble getInstance(Integer line, Integer column){
+    public static TypeDouble getInstance(Integer line, Integer column){
         if (instance == null) {
             instance = new TypeDouble(line, column);
         }
         return instance;
     }
 
+    @Override
+    public String toString() {
+        return "TypeDouble{}";
+    }
 }

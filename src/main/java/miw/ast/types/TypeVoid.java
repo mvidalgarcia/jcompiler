@@ -11,11 +11,15 @@ public class TypeVoid extends AbstractASTNode implements Type {
         super(line, column);
     }
 
-    public TypeVoid getInstance(Integer line, Integer column){
+    public static TypeVoid getInstance(Integer line, Integer column){
         if (instance == null) {
             instance = new TypeVoid(line, column);
         }
         return instance;
     }
 
+    @Override
+    public String toString() {
+        return "TypeVoid{}";
+    }
 }

@@ -17,6 +17,11 @@ public class TypeError extends AbstractASTNode implements Type {
         ErrorHandler.getInstance().addError(this);
     }
 
+    public TypeError(String description, ASTNode astNode) {
+        this.description = description;
+        this. astNode = astNode;
+    }
+
     @Override
     public String toString() {
         return "Lexical error in line " + line +

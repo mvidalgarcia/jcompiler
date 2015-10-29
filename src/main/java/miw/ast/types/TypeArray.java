@@ -14,4 +14,12 @@ public class TypeArray extends AbstractASTNode implements Type {
         this.size = size;
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "TypeArray{" +
+                "size=" + size +
+                ", type=" + type +
+                '}';
+    }
 }

@@ -5,21 +5,21 @@ import miw.ast.AbstractASTNode;
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
-public class Arithmetic extends AbstractASTNode implements Expression {
-    public Expression firstExpression;
-    public Expression secondExpression;
-    public String operator;
+public class Arithmetic extends AbstractBinaryExpression {
 
-    public Arithmetic(Integer line, Integer column, Expression firstExpression,
-                      String operator, Expression secondExpression) {
-        super(line, column);
-        this.firstExpression = firstExpression;
-        this.secondExpression = secondExpression;
-        this.operator = operator;
+    public Arithmetic(Integer line, Integer column, Expression leftExpression,
+                      String operator, Expression rightExpression) {
+        super(line, column, leftExpression, rightExpression, operator);
     }
 
     @Override
     public String toString() {
-        return "("+firstExpression+operator+secondExpression+")";
+        return "Arithmetic{" +
+                "line=" + line +
+                ", column=" + column +
+                ", leftExpression=" + leftExpression +
+                ", operator='" + operator + '\'' +
+                ", rightExpression=" + rightExpression+
+                '}';
     }
 }

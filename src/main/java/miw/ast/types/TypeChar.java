@@ -12,11 +12,15 @@ public class TypeChar extends AbstractASTNode implements Type {
         super(line, column);
     }
 
-    public TypeChar getInstance(Integer line, Integer column){
+    public static TypeChar getInstance(Integer line, Integer column){
         if (instance == null) {
             instance = new TypeChar(line, column);
         }
         return instance;
     }
 
+    @Override
+    public String toString() {
+        return "TypeChar{}";
+    }
 }

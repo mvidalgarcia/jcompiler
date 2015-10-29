@@ -15,4 +15,12 @@ public class ArrayAccess extends AbstractASTNode implements Expression {
         this.index = index;
 
     }
+
+    @Override
+    public String toString() {
+        return "ArrayAccess{" +
+                "array=" + array +
+                ", index=" + index +
+                '}';
+    }
 }

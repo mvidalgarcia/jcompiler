@@ -10,13 +10,14 @@ import java.util.List;
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
-public class Program {
-    public List<Statement> statements;
+public class Program extends AbstractASTNode {
     public List<VarDefinition> varDefinitions;
+    public List<Statement> statements;
 
-    public Program(List<Statement> statements, List<VarDefinition> varDefinitions) {
-        this.statements = statements;
+    public Program(Integer line, Integer column, List<Statement> statements, List<VarDefinition> varDefinitions) {
+        super(line, column);
         this.varDefinitions = varDefinitions;
+        this.statements = statements;
     }
 
     @Override

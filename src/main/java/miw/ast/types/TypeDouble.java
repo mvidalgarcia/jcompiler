@@ -7,11 +7,13 @@ import miw.ast.AbstractASTNode;
  */
 public class TypeDouble extends AbstractASTNode implements Type {
     private static TypeDouble instance;
-    private TypeDouble(){}
+    private TypeDouble(Integer line, Integer column){
+        super(line, column);
+    }
 
-    public TypeDouble getInstance(){
+    public TypeDouble getInstance(Integer line, Integer column){
         if (instance == null) {
-            instance = new TypeDouble();
+            instance = new TypeDouble(line, column);
         }
         return instance;
     }

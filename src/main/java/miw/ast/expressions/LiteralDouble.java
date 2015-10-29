@@ -9,9 +9,8 @@ public class LiteralDouble extends AbstractASTNode implements Expression {
     public Double value;
 
     public LiteralDouble(Integer line, Integer column, Double value) {
+        super(line, column);
         this.value = value;
-        this.line = line;
-        this.column = column;
     }
 
     @Override

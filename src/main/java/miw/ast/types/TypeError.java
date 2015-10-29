@@ -12,8 +12,7 @@ public class TypeError extends AbstractASTNode implements Type {
     public ASTNode astNode;
 
     public TypeError(Integer line, Integer column, String description) {
-        this.line = line;
-        this.column = column;
+        super(line, column);
         this.description = description;
         ErrorHandler.getInstance().addError(this);
     }

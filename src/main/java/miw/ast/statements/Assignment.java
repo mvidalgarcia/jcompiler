@@ -11,10 +11,9 @@ public class Assignment extends AbstractASTNode implements Statement {
     public Expression right_expression;
 
     public Assignment(Integer line, Integer column, Expression left_expression, Expression right_expression) {
+        super(line, column);
         this.left_expression = left_expression;
         this.right_expression = right_expression;
-        this.line = line;
-        this.column = column;
     }
 
     @Override

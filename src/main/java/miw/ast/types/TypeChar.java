@@ -7,11 +7,14 @@ import miw.ast.AbstractASTNode;
  */
 public class TypeChar extends AbstractASTNode implements Type {
     private static TypeChar instance;
-    private TypeChar(){}
 
-    public TypeChar getInstance(){
+    private TypeChar(Integer line, Integer column){
+        super(line, column);
+    }
+
+    public TypeChar getInstance(Integer line, Integer column){
         if (instance == null) {
-            instance = new TypeChar();
+            instance = new TypeChar(line, column);
         }
         return instance;
     }

@@ -9,9 +9,8 @@ public class LiteralInteger extends AbstractASTNode implements Expression {
     public Integer value;
 
     public LiteralInteger(Integer line, Integer column, Integer value) {
+        super(line, column);
         this.value = value;
-        this.line = line;
-        this.column = column;
     }
 
     @Override

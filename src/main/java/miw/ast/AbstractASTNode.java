@@ -6,6 +6,10 @@ package miw.ast;
 public abstract class AbstractASTNode implements ASTNode{
     public Integer line, column;
 
+    public AbstractASTNode(Integer line, Integer column) {
+        this.line = line;
+        this.column = column;
+    }
 
     public Integer getLine() {
         return line;

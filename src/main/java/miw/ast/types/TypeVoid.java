@@ -7,11 +7,13 @@ import miw.ast.AbstractASTNode;
  */
 public class TypeVoid extends AbstractASTNode implements Type {
     private static TypeVoid instance;
-    private TypeVoid(){}
+    private TypeVoid(Integer line, Integer column){
+        super(line, column);
+    }
 
-    public TypeVoid getInstance(){
+    public TypeVoid getInstance(Integer line, Integer column){
         if (instance == null) {
-            instance = new TypeVoid();
+            instance = new TypeVoid(line, column);
         }
         return instance;
     }

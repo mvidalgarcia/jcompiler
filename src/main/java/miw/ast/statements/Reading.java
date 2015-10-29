@@ -12,9 +12,8 @@ public class Reading extends AbstractASTNode implements Statement {
     public List<Expression> expressions;
 
     public Reading(Integer line, Integer column, List<Expression> expressions) {
+        super(line, column);
         this.expressions = expressions;
-        this.line = line;
-        this.column = column;
     }
 
     @Override

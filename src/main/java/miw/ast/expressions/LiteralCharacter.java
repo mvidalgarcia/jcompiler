@@ -9,9 +9,8 @@ public class LiteralCharacter extends AbstractASTNode implements Expression {
     public char value;
 
     public LiteralCharacter(Integer line, Integer column, char value) {
+        super(line, column);
         this.value = value;
-        this.line = line;
-        this.column = column;
     }
 
     @Override

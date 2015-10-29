@@ -12,9 +12,8 @@ public class Writing extends AbstractASTNode implements Statement {
     public List<Expression> expressions;
 
     public Writing(Integer line, Integer column, List<Expression> expressions) {
+        super(line, column);
         this.expressions = expressions;
-        this.column = column;
-        this.line = line;
     }
 
     @Override

@@ -9,9 +9,8 @@ public class Variable extends AbstractASTNode implements Expression {
     public String name;
 
     public Variable(Integer line, Integer column, String name) {
+        super(line, column);
         this.name = name;
-        this.column = column;
-        this.line = line;
     }
 
     @Override

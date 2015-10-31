@@ -2,29 +2,34 @@ package miw.ast.statements;
 
 import miw.ast.AbstractASTNode;
 import miw.ast.expressions.Expression;
+import miw.visitor.Visitor;
 
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
 public class Assignment extends AbstractASTNode implements Statement {
-    public Expression left_expression;
-    public Expression right_expression;
+    public Expression leftExpression;
+    public Expression rightExpression;
 
     public Assignment(Integer line, Integer column, Expression left_expression, Expression right_expression) {
         super(line, column);
-        this.left_expression = left_expression;
-        this.right_expression = right_expression;
+        this.leftExpression = left_expression;
+        this.rightExpression = right_expression;
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 
     @Override
     public String toString() {
         return "Assignment{" +
-                "left_expression=" + left_expression +
-                ", right_expression=" + right_expression +
+                "left_expression=" + leftExpression +
+                ", right_expression=" + rightExpression +
                 '}';
     }
 
     public String toStringMod() {
-        return left_expression+" = "+right_expression;
+        return leftExpression+" = "+rightExpression;
     }
 }

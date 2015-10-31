@@ -1,6 +1,7 @@
 package miw.ast.types;
 
 import miw.ast.AbstractASTNode;
+import miw.visitor.Visitor;
 
 /**
  * Created by mvidalgarcia on 28/10/15.
@@ -17,6 +18,10 @@ public class TypeChar extends AbstractASTNode implements Type {
             instance = new TypeChar(line, column);
         }
         return instance;
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 
     @Override

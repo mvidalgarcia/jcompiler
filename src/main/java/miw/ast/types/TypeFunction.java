@@ -2,6 +2,7 @@ package miw.ast.types;
 
 import miw.ast.AbstractASTNode;
 import miw.ast.statements.definitions.VariableDef;
+import miw.visitor.Visitor;
 
 import java.util.List;
 
@@ -16,6 +17,10 @@ public class TypeFunction extends AbstractASTNode implements Type {
         super(line, column);
         this.returnType = returnType;
         this.parameters = parameters;
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 
     @Override

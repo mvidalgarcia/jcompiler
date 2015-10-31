@@ -1,6 +1,7 @@
 package miw.ast.expressions;
 
 import miw.ast.AbstractASTNode;
+import miw.visitor.Visitor;
 
 /**
  * Created by mvidalgarcia on 26/10/15.
@@ -22,5 +23,9 @@ public class Identifier extends AbstractASTNode implements Expression {
 
     public String toStringMod() {
         return name;
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 }

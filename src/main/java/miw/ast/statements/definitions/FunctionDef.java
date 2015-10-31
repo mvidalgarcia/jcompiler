@@ -1,9 +1,11 @@
 package miw.ast.statements.definitions;
 
 import miw.ast.AbstractASTNode;
+import miw.ast.expressions.Arithmetic;
 import miw.ast.expressions.Identifier;
 import miw.ast.statements.Statement;
 import miw.ast.types.Type;
+import miw.visitor.Visitor;
 
 import java.util.List;
 
@@ -37,5 +39,9 @@ public class FunctionDef extends AbstractASTNode implements Definition {
                 ", type=" + type +
                 ", name=" + name +
                 '}';
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 }

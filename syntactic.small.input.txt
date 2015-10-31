@@ -2,7 +2,7 @@
 	Ejemplo de programa de entrada 
 */
 
-int i,e;
+int i,e,z;
 double j;
 int[10] v;
 

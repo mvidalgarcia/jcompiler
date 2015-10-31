@@ -1,7 +1,7 @@
 //### This file created by BYACC 1.8(/Java extension  1.15)
 //### Java capabilities added 7 Jan 97, Bob Jamison
 //### Updated : 27 Nov 97  -- Bob Jamison, Joe Nieten
-//###           01 Jan 98  -- Bob Jamison -- fixed generic semantic constructor
+//###           01 Jan 98  -- Bob Jamison -- fixed generic visitor constructor
 //###           01 Jun 99  -- Bob Jamison -- added Runnable support
 //###           06 Aug 00  -- Bob Jamison -- made state variables class-global
 //###           03 Jan 01  -- Bob Jamison -- improved flags, tracing
@@ -112,7 +112,7 @@ int i;
 //########## SEMANTIC VALUES ##########
 //## **user defined:Object
 String   yytext;//user variable to return contextual strings
-Object yyval; //used to return semantic vals from action routines
+Object yyval; //used to return visitor vals from action routines
 Object yylval;//the 'lval' (result) I got from yylex()
 Object valstk[] = new Object[YYSTACKSIZE];
 int valptr;
@@ -156,7 +156,7 @@ final Object dup_yyval(Object val)
 {
   return val;
 }
-//#### end semantic value section ####
+//#### end visitor value section ####
 public final static short CTE_INTEGER=257;
 public final static short CTE_CHARACTER=258;
 public final static short CTE_CHAR=259;
@@ -542,8 +542,8 @@ boolean doaction;
     if (yydebug)
       debug("state "+yystate+", reducing "+yym+" by rule "+yyn+" ("+yyrule[yyn]+")");
     if (yym>0)                 //if count of rhs not 'nil'
-      yyval = val_peek(yym-1); //get current semantic value
-    yyval = dup_yyval(yyval); //duplicate yyval if ParserVal is used as semantic value
+      yyval = val_peek(yym-1); //get current visitor value
+    yyval = dup_yyval(yyval); //duplicate yyval if ParserVal is used as visitor value
     switch(yyn)
       {
 //########## USER-SUPPLIED ACTIONS ##########
@@ -699,7 +699,7 @@ break;
       if (yydebug) debug("After reduction, shifting from state 0 to state "+YYFINAL+"");
       yystate = YYFINAL;         //explicitly say we're done
       state_push(YYFINAL);       //and save it
-      val_push(yyval);           //also save the semantic value of parsing
+      val_push(yyval);           //also save the visitor value of parsing
       if (yychar < 0)            //we want another character?
         {
         yychar = yylex();        //get next character

@@ -2,6 +2,7 @@ package miw.ast.statements;
 
 import miw.ast.AbstractASTNode;
 import miw.ast.expressions.Expression;
+import miw.visitor.Visitor;
 
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class Writing extends AbstractASTNode implements Statement {
     public Writing(Integer line, Integer column, List<Expression> expressions) {
         super(line, column);
         this.expressions = expressions;
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 
     @Override

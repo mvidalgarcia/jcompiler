@@ -32,7 +32,7 @@ public class Main {
         Parser parser = new Parser(lexico);
 //        int token;
 //        while ((token=lexico.yylex()) != 0) {
-//            System.out.println("Line: "+lexico.getLine()+", column: "+lexico.getColumn()+", token: "+token+", semantic value: "+parser.getYylval());
+//            System.out.println("Line: "+lexico.getLine()+", column: "+lexico.getColumn()+", token: "+token+", visitor value: "+parser.getYylval());
 //        }
 
         // Parse!

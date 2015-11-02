@@ -2,6 +2,9 @@ package miw.visitor;
 
 import miw.ast.Program;
 import miw.ast.expressions.*;
+import miw.ast.expressions.literals.LiteralCharacter;
+import miw.ast.expressions.literals.LiteralDouble;
+import miw.ast.expressions.literals.LiteralInteger;
 import miw.ast.statements.Assignment;
 import miw.ast.statements.Reading;
 import miw.ast.statements.Statement;
@@ -42,6 +45,17 @@ public abstract class AbstractVisitor implements Visitor {
 
     public Object visit(UnaryMinus unaryMinus, Object params) {
         unaryMinus.expression.accept(this, params);
+        return null;
+    }
+
+    /* Expressions -> Literals */
+    public Object visit(LiteralInteger literalInteger, Object params) {
+        return null;
+    }
+    public Object visit(LiteralDouble literalDouble, Object params) {
+        return null;
+    }
+    public Object visit(LiteralCharacter literalCharacter, Object params) {
         return null;
     }
 

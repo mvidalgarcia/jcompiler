@@ -1,0 +1,6 @@
+// Programa erróneo
+
+void main() {
+	//int i;
+	read i+2;
+}

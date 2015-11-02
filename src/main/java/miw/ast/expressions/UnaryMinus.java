@@ -6,7 +6,7 @@ import miw.visitor.Visitor;
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
-public class UnaryMinus extends AbstractASTNode implements Expression {
+public class UnaryMinus extends AbstractExpression implements Expression {
 
     public Expression expression;
 

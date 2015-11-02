@@ -8,4 +8,6 @@ import miw.ast.AbstractASTNode;
  */
 public interface Expression extends ASTNode {
     String toString();
+    boolean getLvalue();
+    void setLvalue(boolean lvalue);
 }

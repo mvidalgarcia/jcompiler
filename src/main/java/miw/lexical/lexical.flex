@@ -120,4 +120,4 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t\f]
 '\\{Digit}+' {parser.setYylval((char)Integer.parseInt(yytext().replace("\\", "").replace("\'", ""))); return Parser.CTE_CHARACTER; }
 
 // . -> anything
-.		{ new TypeError(getLine(), getColumn(), yycharat(0)+""); }
+.		{ new TypeError(getLine(), getColumn(), "Lexical error: character \'" + yycharat(0)+  "\' unknown."); }

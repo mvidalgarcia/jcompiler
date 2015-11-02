@@ -19,8 +19,10 @@ public class TypeError extends AbstractASTNode implements Type {
     }
 
     public TypeError(String description, ASTNode astNode) {
+        super(astNode.getLine(), astNode.getColumn());
         this.description = description;
         this.astNode = astNode;
+        ErrorHandler.getInstance().addError(this);
     }
 
     public Object accept(Visitor visitor, Object params) {
@@ -29,9 +31,9 @@ public class TypeError extends AbstractASTNode implements Type {
 
     @Override
     public String toString() {
-        return "Lexical error in line " + line +
+        return "Error in line " + line +
                 ", column " + column +
-                ", character \'" + description + "\' unknown.";
+                " - " + description;
     }
 
 }

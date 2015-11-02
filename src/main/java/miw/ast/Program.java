@@ -3,6 +3,7 @@ package miw.ast;
 import miw.ast.statements.Statement;
 import miw.ast.statements.definitions.Definition;
 import miw.ast.statements.definitions.VariableDef;
+import miw.visitor.Visitor;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,6 +25,10 @@ public class Program extends AbstractASTNode {
         return "Program{" +
                 "definitions=" + definitions +
                 '}';
+    }
+
+    public Object accept(Visitor visitor, Object params) {
+        return visitor.visit(this, params);
     }
 
 //    public String toStringMod() {

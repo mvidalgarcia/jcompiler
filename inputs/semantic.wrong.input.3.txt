@@ -1,0 +1,11 @@
+// Programa erróneo
+
+void main() {
+	int i;
+	int j;
+	int i; // Variable duplicada
+	
+	i = 3;
+	j = 4;
+	k = 5; // Variable no declarada		
+}

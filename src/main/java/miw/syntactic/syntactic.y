@@ -118,8 +118,6 @@ private Lexical lexico;
 * AST reference
 */
 public ASTNode ast;
-// Visitor visitor = new VisitorX(...);
-// visitor.visit(ast);
 
 // * Lexical analyzer call
 private int yylex () {

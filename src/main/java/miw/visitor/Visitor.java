@@ -6,6 +6,9 @@ import miw.ast.expressions.Arithmetic;
 import miw.ast.expressions.ArrayAccess;
 import miw.ast.expressions.Identifier;
 import miw.ast.expressions.UnaryMinus;
+import miw.ast.expressions.literals.LiteralCharacter;
+import miw.ast.expressions.literals.LiteralDouble;
+import miw.ast.expressions.literals.LiteralInteger;
 import miw.ast.statements.Assignment;
 import miw.ast.statements.Reading;
 import miw.ast.statements.Writing;
@@ -25,6 +28,11 @@ public interface Visitor {
     Object visit(Identifier identifier, Object params);
     Object visit(ArrayAccess arrayAccess, Object params);
     Object visit(UnaryMinus unaryMinus, Object params);
+
+    /* Expressions -> Literals */
+    Object visit(LiteralInteger literalInteger, Object params);
+    Object visit(LiteralDouble literalDouble, Object params);
+    Object visit(LiteralCharacter literalCharacter, Object params);
 
 
     /* Statements */

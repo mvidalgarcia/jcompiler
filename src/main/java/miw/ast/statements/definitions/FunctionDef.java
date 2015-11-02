@@ -14,9 +14,9 @@ import java.util.List;
 public class FunctionDef extends AbstractASTNode implements Statement, Definition {
     public List<Statement> statements;
     public Type type;
-    public Identifier name;
+    public String name;
 
-    public FunctionDef(Integer line, Integer column, Type type, Identifier name, List<Statement> statements) {
+    public FunctionDef(Integer line, Integer column, Type type, String name, List<Statement> statements) {
         super(line, column);
         this.type = type;
         this.name = name;
@@ -27,8 +27,16 @@ public class FunctionDef extends AbstractASTNode implements Statement, Definitio
         return type;
     }
 
-    public Identifier getName() {
+    public String getName() {
         return name;
+    }
+
+    public Integer getScope() {
+        return 0;
+    }
+
+    public void setScope(Integer scope) {
+
     }
 
     @Override

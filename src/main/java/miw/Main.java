@@ -3,6 +3,7 @@ package miw;
 import miw.error.ErrorHandler;
 import miw.ast.types.TypeError;
 import miw.lexical.Lexical;
+import miw.semantic.IdentificationVisitor;
 import miw.semantic.SemanticVisitor;
 import miw.syntactic.Parser;
 
@@ -40,6 +41,7 @@ public class Main {
         parser.run();
         System.out.println(parser.ast);
         parser.ast.accept(new SemanticVisitor(), null);
+        parser.ast.accept(new IdentificationVisitor(), null);
 
         /*  Print errors */
         if (ErrorHandler.getInstance().areErrors()) {

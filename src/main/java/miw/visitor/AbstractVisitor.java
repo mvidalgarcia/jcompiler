@@ -146,13 +146,11 @@ public abstract class AbstractVisitor implements Visitor {
     /* Statements -> Definitions */
     public Object visit(VariableDef variableDef, Object params) {
         variableDef.type.accept(this, params);
-        variableDef.name.accept(this, params);
         return null;
     }
 
     public Object visit(FunctionDef functionDef, Object params) {
         functionDef.type.accept(this, params);
-        functionDef.name.accept(this, params);
         for (Statement statement: functionDef.statements)
             statement.accept(this, params);
         return null;

@@ -1,6 +1,6 @@
-// Programa erróneo
+// Mistaken program
 
 void main() {
-	//int i;
+	int i;
 	read i+2;
 }

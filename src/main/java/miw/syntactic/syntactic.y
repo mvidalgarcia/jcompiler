@@ -77,13 +77,13 @@ var_defs: var_defs var_def { List<VariableDef> var_defs = (List<VariableDef>)$1;
 var_def:  simple_type ids ';' { List<Identifier> identifiers = (List<Identifier>) $2;
                                  List<VariableDef> var_defs = new ArrayList<VariableDef>();
                                  for (Identifier identifier: identifiers) {
-                                    var_defs.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)$1, identifier));
+                                    var_defs.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)$1, identifier.name));
                                  }
                                  $$ = var_defs;}
         | array_type ids ';' { List<Identifier> identifiers = (List<Identifier>) $2;
                                List<VariableDef> var_defs = new ArrayList<VariableDef>();
                                for (Identifier identifier: identifiers) {
-                                    var_defs.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)$1, identifier));
+                                    var_defs.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)$1, identifier.name));
                                }
                                $$ = var_defs;}
         ;
@@ -117,14 +117,12 @@ func_def: simple_type IDENTIFIER '(' arguments_opt ')' '{' func_body '}' {
                     Type type = (Type) $1;
                     Type typeFunction = new TypeFunction(lexico.getLine(), lexico.getColumn(), type, (List<VariableDef>)$4);
                     $$ = new FunctionDef(lexico.getLine(), lexico.getColumn(), typeFunction,
-                         new Identifier(lexico.getLine(), lexico.getColumn(), (String) $2),
-                         (List<Statement>) $7); }
+                          (String) $2, (List<Statement>) $7); }
         | void_type IDENTIFIER '(' arguments_opt ')' '{' func_body '}' {
                     Type type = (Type) $1;
                     Type typeFunction = new TypeFunction(lexico.getLine(), lexico.getColumn(), type, (List<VariableDef>)$4);
                     $$ = new FunctionDef(lexico.getLine(), lexico.getColumn(), typeFunction,
-                    new Identifier(lexico.getLine(), lexico.getColumn(), (String) $2),
-                    (List<Statement>) $7); }
+                    (String) $2, (List<Statement>) $7); }
         ;
 
 arguments_opt: arguments { $$ = $1; }
@@ -135,15 +133,14 @@ arguments: argument { $$ = $1; }
          | arguments ',' argument { List<VariableDef> arguments = (List<VariableDef>)$1;
                                     List<VariableDef> argument = (List<VariableDef>)$3;
                                     for(VariableDef arg: arguments) {
-                                        if(arg.name.name.equals(argument.get(0).name.name))
-                                            yyerror("Parameter \""+ arg.name.name +"\" repeated.");
+                                        if(arg.name.equals(argument.get(0).name))
+                                            yyerror("Parameter \""+ arg.name +"\" repeated.");
                                     }
                                     arguments.addAll(argument); $$ = arguments; }
          ;
 
 argument: simple_type IDENTIFIER { List<VariableDef> list = new ArrayList<VariableDef>();
-                                   Identifier identifier = new Identifier(lexico.getLine(), lexico.getColumn(), (String)$2);
-                                   list.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)$1, identifier));
+                                   list.add(new VariableDef(lexico.getLine(), lexico.getColumn(), (Type)$1, (String)$2));
                                    $$ = list; }
          ;
 
@@ -164,8 +161,7 @@ statements_opt: statements { $$ = $1; }
 
 main: VOID MAIN '(' ')' '{' func_body '}' { $$ = new FunctionDef(lexico.getLine(), lexico.getColumn(),
                                                 TypeVoid.getInstance(lexico.getLine(), lexico.getColumn()),
-                                                new Identifier(lexico.getLine(), lexico.getColumn(), "main"),
-                                                (List<Statement>) $6); }
+                                                "main", (List<Statement>) $6); }
 
 statements: statement { List<Statement> list = new ArrayList<Statement>(); list.add((Statement) $1); $$ = list; }
          | statements statement { List<Statement> list = (List<Statement>) $1; list.add((Statement) $2); $$ = list; }

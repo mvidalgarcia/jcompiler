@@ -9,5 +9,7 @@ import miw.ast.types.Type;
  */
 public interface Definition extends ASTNode {
     Type getType();
-    Identifier getName();
+    String getName();
+    Integer getScope();
+    void setScope(Integer scope);
 }

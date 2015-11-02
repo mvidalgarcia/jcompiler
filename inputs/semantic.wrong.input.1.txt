@@ -1,4 +1,4 @@
-// Programa erróneo
+// Mistaken program
 
 void main() {
 	int i;

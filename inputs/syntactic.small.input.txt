@@ -1,4 +1,5 @@
-//int a;
+int a;
+int f(int a, int v){}
 void main() {
     write 'c', 'i', 'e', 'r', 't', 'o';
     if (n == vector[0][0] && !c)

@@ -16,6 +16,10 @@ public class TypeArray extends AbstractASTNode implements Type {
         this.type = type;
     }
 
+//    public static TypeArray newArray(Type type, Integer size) {
+//
+//    }
+
     public Object accept(Visitor visitor, Object params) {
         return visitor.visit(this, params);
     }

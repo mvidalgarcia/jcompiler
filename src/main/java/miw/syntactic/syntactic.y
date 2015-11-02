@@ -126,8 +126,12 @@ arguments_opt: arguments { $$ = $1; }
          ;
 
 arguments: argument { $$ = $1; }
-         | arguments ',' argument { List<Definition> arguments = (List<Definition>)$1;
-                                    List<Definition> argument = (List<Definition>)$3;
+         | arguments ',' argument { List<VariableDef> arguments = (List<VariableDef>)$1;
+                                    List<VariableDef> argument = (List<VariableDef>)$3;
+                                    for(VariableDef arg: arguments) {
+                                        if(arg.name.name.equals(argument.get(0).name.name))
+                                            yyerror("Parameter \""+ arg.name.name +"\" repeated.");
+                                    }
                                     arguments.addAll(argument); $$ = arguments; }
          ;
 

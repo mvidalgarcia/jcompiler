@@ -42,10 +42,16 @@ import java.util.*;
 // Grammar terminus in capitals or double quote (ID, CTE_*, etc), non grammar terminus in lowercase.
 // One-length tokens with simple quotes.
 
-program:  global_defs main { List<Definition> list_defs = (List<Definition>) $1;
-                          Definition main = (FunctionDef) $2;
-                          list_defs.add(main);
-                          ast = new Program(lexico.getLine(), lexico.getColumn(), list_defs); }
+program: defs { ast = (ASTNode) $1; }
+       ;
+
+defs: global_defs main { List<Definition> list_defs = (List<Definition>) $1;
+                         Definition main = (FunctionDef) $2;
+                         list_defs.add(main);
+                         $$ = new Program(lexico.getLine(), lexico.getColumn(), list_defs); }
+    | main { Definition main = (FunctionDef) $1; List<Definition> list_defs = new ArrayList<Definition>();
+             list_defs.add(main); $$ = new Program(lexico.getLine(), lexico.getColumn(), list_defs); }
+    ;
 
 global_defs: global_def { $$ = $1; }
            | global_defs global_def { List<Definition> definitions = (List<Definition>) $1;

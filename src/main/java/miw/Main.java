@@ -39,7 +39,7 @@ public class Main {
         // Parse!
         parser.run();
         System.out.println(parser.ast);
-        //parser.ast.accept(new SemanticVisitor(), null);
+        parser.ast.accept(new SemanticVisitor(), null);
 
         /*  Print errors */
         if (ErrorHandler.getInstance().areErrors()) {

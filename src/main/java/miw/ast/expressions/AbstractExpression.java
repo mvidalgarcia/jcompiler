@@ -13,7 +13,7 @@ public abstract class AbstractExpression extends AbstractASTNode implements Expr
     }
 
     public boolean getLvalue() {
-        return false;
+        return lvalue;
     }
 
     public void setLvalue(boolean lvalue) {

@@ -2,6 +2,7 @@ int a;
 int f(int a, int v){}
 void main() {
     write 'c', 'i', 'e', 'r', 't', 'o';
+    a = 5;
     if (n == vector[0][0] && !c)
         write 'c', 'i', 'e', 'r', 't', 'o';
     else

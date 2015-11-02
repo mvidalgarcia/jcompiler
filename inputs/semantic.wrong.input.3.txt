@@ -1,4 +1,4 @@
-// Programa erróneo
+// Programa errÃ³neo
 
 void main() {
 	int i;

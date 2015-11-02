@@ -22,8 +22,10 @@ import java.util.*;
 // The order means ascending preference, last line -> most preference
 // In same line, left token is done first
 %right '='
+%left AND OR '!'
+%left '>' GTE '<' LTE NOTEQUAL EQUAL
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' '%'
 %right UNARYMINUS
 %nonassoc '[' ']'
 %nonassoc '(' ')'
@@ -37,7 +39,7 @@ import java.util.*;
 program:  var_defs main { List<Definition> list_defs = (List<Definition>) $1;
                           Definition main = (FunctionDef) $2;
                           list_defs.add(main);
-                          ast = new Program(lexico.getLine(), lexico.getColumn(), list_defs); System.out.println(ast);}
+                          ast = new Program(lexico.getLine(), lexico.getColumn(), list_defs);}
 
 var_defs: var_defs var_def { List<VariableDef> var_defs = (List<VariableDef>)$1;
                              List<VariableDef> var_def = (List<VariableDef>)$2;

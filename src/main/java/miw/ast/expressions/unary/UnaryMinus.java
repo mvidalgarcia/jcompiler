@@ -1,18 +1,17 @@
-package miw.ast.expressions;
+package miw.ast.expressions.unary;
 
 import miw.ast.AbstractASTNode;
+import miw.ast.expressions.AbstractExpression;
+import miw.ast.expressions.Expression;
 import miw.visitor.Visitor;
 
 /**
  * Created by mvidalgarcia on 26/10/15.
  */
-public class UnaryMinus extends AbstractExpression implements Expression {
-
-    public Expression expression;
+public class UnaryMinus extends AbstractUnaryExpression implements Expression {
 
     public UnaryMinus(Integer line, Integer column, Expression expression) {
-        super(line, column);
-        this.expression = expression;
+        super(line, column, expression);
     }
 
     @Override

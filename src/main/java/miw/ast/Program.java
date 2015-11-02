@@ -1,8 +1,7 @@
 package miw.ast;
 
-import miw.ast.statements.Statement;
+
 import miw.ast.statements.definitions.Definition;
-import miw.ast.statements.definitions.VariableDef;
 import miw.visitor.Visitor;
 
 import java.util.Collections;

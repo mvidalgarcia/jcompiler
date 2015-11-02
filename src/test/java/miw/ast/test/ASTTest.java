@@ -4,6 +4,7 @@ import miw.ast.*;
 import miw.ast.expressions.*;
 import miw.ast.expressions.binary.Arithmetic;
 import miw.ast.expressions.literals.LiteralInteger;
+import miw.ast.expressions.unary.UnaryMinus;
 import miw.ast.statements.Assignment;
 import miw.ast.statements.Reading;
 import miw.ast.statements.Statement;

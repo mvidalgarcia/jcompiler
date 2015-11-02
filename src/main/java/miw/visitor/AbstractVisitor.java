@@ -4,13 +4,15 @@ import miw.ast.Program;
 import miw.ast.expressions.*;
 import miw.ast.expressions.binary.Arithmetic;
 import miw.ast.expressions.binary.ArrayAccess;
+import miw.ast.expressions.binary.Comparison;
+import miw.ast.expressions.binary.Logic;
 import miw.ast.expressions.literals.LiteralCharacter;
 import miw.ast.expressions.literals.LiteralDouble;
 import miw.ast.expressions.literals.LiteralInteger;
-import miw.ast.statements.Assignment;
-import miw.ast.statements.Reading;
-import miw.ast.statements.Statement;
-import miw.ast.statements.Writing;
+import miw.ast.expressions.unary.Cast;
+import miw.ast.expressions.unary.Negation;
+import miw.ast.expressions.unary.UnaryMinus;
+import miw.ast.statements.*;
 import miw.ast.statements.definitions.Definition;
 import miw.ast.statements.definitions.FunctionDef;
 import miw.ast.statements.definitions.VariableDef;
@@ -29,24 +31,45 @@ public abstract class AbstractVisitor implements Visitor {
     }
 
     /* Expressions */
-    public Object visit(Arithmetic arithmetic, Object params) {
-        arithmetic.leftExpression.accept(this, params);
-        arithmetic.rightExpression.accept(this, params);
-        return null;
-    }
 
     public Object visit(Identifier identifier, Object params) {
         return null;
     }
 
+    /* Expressions -> Binary */
+    public Object visit(Arithmetic arithmetic, Object params) {
+        arithmetic.leftExpression.accept(this, params);
+        arithmetic.rightExpression.accept(this, params);
+        return null;
+    }
     public Object visit(ArrayAccess arrayAccess, Object params) {
-        arrayAccess.array.accept(this, params);
-        arrayAccess.index.accept(this, params);
+        arrayAccess.leftExpression.accept(this, params);
+        arrayAccess.rightExpression.accept(this, params);
+        return null;
+    }
+    public Object visit(Comparison comparison, Object params) {
+        comparison.leftExpression.accept(this, params);
+        comparison.rightExpression.accept(this, params);
+        return null;
+    }
+    public Object visit(Logic logic, Object params) {
+        logic.leftExpression.accept(this, params);
+        logic.rightExpression.accept(this, params);
         return null;
     }
 
+    /* Expressions -> Unary */
     public Object visit(UnaryMinus unaryMinus, Object params) {
         unaryMinus.expression.accept(this, params);
+        return null;
+    }
+    public Object visit(Negation negation, Object params) {
+        negation.expression.accept(this, params);
+        return null;
+    }
+    public Object visit(Cast cast, Object params) {
+        cast.type.accept(this, params);
+        cast.expression.accept(this, params);
         return null;
     }
 
@@ -77,6 +100,38 @@ public abstract class AbstractVisitor implements Visitor {
     public Object visit(Reading reading, Object params) {
         for (Expression expression: reading.expressions)
             expression.accept(this, params);
+        return null;
+    }
+
+    public Object visit(If ifStatement, Object params) {
+        for (Statement statement: ifStatement.ifBody)
+            statement.accept(this, params);
+
+        for (Statement statement: ifStatement.elseBody)
+            statement.accept(this, params);
+
+        ifStatement.condition.accept(this, params);
+        return null;
+    }
+
+    public Object visit(While whileStatement, Object params) {
+        for (Statement statement: whileStatement.whileBody)
+            statement.accept(this, params);
+
+        whileStatement.condition.accept(this, params);
+        return null;
+    }
+
+    public Object visit(Return returnStatement, Object params) {
+        returnStatement.expression.accept(this, params);
+        return null;
+    }
+
+    public Object visit(Invocation invocation, Object params) {
+        for (Expression expression: invocation.arguments)
+            expression.accept(this, params);
+
+        invocation.function.accept(this, params);
         return null;
     }
 

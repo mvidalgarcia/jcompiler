@@ -8,14 +8,14 @@ import miw.visitor.Visitor;
  */
 public class Comparison extends AbstractBinaryExpression implements Expression {
     public Comparison(Integer line, Integer column, Expression leftExpression,
-                      Expression rightExpression, String operator) {
+                      String operator, Expression rightExpression) {
         super(line, column, leftExpression, rightExpression, operator);
     }
 
     @Override
     public String toString() {
         return "Comparison{" +
-                ", leftExpression=" + leftExpression +
+                "leftExpression=" + leftExpression +
                 ", operator='" + operator + '\'' +
                 ", rightExpression=" + rightExpression+
                 '}';

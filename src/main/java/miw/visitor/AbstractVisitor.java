@@ -36,6 +36,14 @@ public abstract class AbstractVisitor implements Visitor {
         return null;
     }
 
+    public Object visit(InvocationExpression invocationExpression, Object params) {
+        for (Expression expression: invocationExpression.arguments)
+            expression.accept(this, params);
+
+        invocationExpression.function.accept(this, params);
+        return null;
+    }
+
     /* Expressions -> Binary */
     public Object visit(Arithmetic arithmetic, Object params) {
         arithmetic.leftExpression.accept(this, params);
@@ -127,11 +135,11 @@ public abstract class AbstractVisitor implements Visitor {
         return null;
     }
 
-    public Object visit(Invocation invocation, Object params) {
-        for (Expression expression: invocation.arguments)
+    public Object visit(InvocationStatement invocationStatement, Object params) {
+        for (Expression expression: invocationStatement.arguments)
             expression.accept(this, params);
 
-        invocation.function.accept(this, params);
+        invocationStatement.function.accept(this, params);
         return null;
     }
 

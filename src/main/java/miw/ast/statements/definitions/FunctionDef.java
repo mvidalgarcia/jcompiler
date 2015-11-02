@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by mvidalgarcia on 29/10/15.
  */
-public class FunctionDef extends AbstractASTNode implements Definition {
+public class FunctionDef extends AbstractASTNode implements Statement, Definition {
     public List<Statement> statements;
     public Type type;
     public Identifier name;
@@ -34,9 +34,9 @@ public class FunctionDef extends AbstractASTNode implements Definition {
     @Override
     public String toString() {
         return "FunctionDef{" +
-                "statements=" + statements +
-                ", type=" + type +
+                "type=" + type +
                 ", name=" + name +
+                ", statements=" + statements +
                 '}';
     }
 

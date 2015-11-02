@@ -10,10 +10,10 @@ import java.util.List;
  * Created by mvidalgarcia on 2/11/15.
  */
 public class While extends AbstractASTNode implements Statement {
-    public List<Statement> whileBody;
     public Expression condition;
+    public List<Statement> whileBody;
 
-    public While(Integer line, Integer column, List<Statement> whileBody, Expression condition) {
+    public While(Integer line, Integer column, Expression condition, List<Statement> whileBody) {
         super(line, column);
         this.whileBody = whileBody;
         this.condition = condition;
@@ -22,8 +22,8 @@ public class While extends AbstractASTNode implements Statement {
     @Override
     public String toString() {
         return "While{" +
-                "whileBody=" + whileBody +
-                ", condition=" + condition +
+                "condition=" + condition +
+                ", whileBody=" + whileBody +
                 '}';
     }
 

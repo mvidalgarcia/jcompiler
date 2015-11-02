@@ -1,6 +1,7 @@
 package miw.visitor;
 
 import miw.ast.Program;
+import miw.ast.expressions.InvocationExpression;
 import miw.ast.expressions.binary.Comparison;
 import miw.ast.expressions.binary.Logic;
 import miw.ast.expressions.unary.Cast;
@@ -17,8 +18,6 @@ import miw.ast.statements.definitions.FunctionDef;
 import miw.ast.statements.definitions.VariableDef;
 import miw.ast.types.*;
 
-import java.util.Locale;
-
 /**
  * Created by mvidalgarcia on 30/10/15.
  */
@@ -28,6 +27,7 @@ public interface Visitor {
 
     /* Expressions */
     Object visit(Identifier identifier, Object params);
+    Object visit(InvocationExpression invocationExpression, Object params);
     /* Expressions -> Binary */
     Object visit(Arithmetic arithmetic, Object params);
     Object visit(ArrayAccess arrayAccess, Object params);
@@ -50,7 +50,7 @@ public interface Visitor {
     Object visit(If ifStatement, Object params);
     Object visit(While whileStatement, Object params);
     Object visit(Return returnStatement, Object params);
-    Object visit(Invocation invocation, Object params);
+    Object visit(InvocationStatement invocationStatement, Object params);
     /* Statements -> Definitions */
     Object visit(VariableDef variableDef, Object params);
     Object visit(FunctionDef functionDef, Object params);

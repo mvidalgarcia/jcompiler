@@ -8,14 +8,14 @@ import miw.visitor.Visitor;
  */
 public class Logic extends AbstractBinaryExpression implements Expression {
     public Logic(Integer line, Integer column, Expression leftExpression,
-                 Expression rightExpression, String operator) {
+                 String operator, Expression rightExpression) {
         super(line, column, leftExpression, rightExpression, operator);
     }
 
     @Override
     public String toString() {
         return "Logic{" +
-                ", leftExpression=" + leftExpression +
+                "leftExpression=" + leftExpression +
                 ", operator='" + operator + '\'' +
                 ", rightExpression=" + rightExpression+
                 '}';

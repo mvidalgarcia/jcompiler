@@ -14,8 +14,8 @@ public class If extends AbstractASTNode implements Statement {
     public List<Statement> elseBody;
     public Expression condition;
 
-    public If(Integer line, Integer column, List<Statement> ifBody,
-              List<Statement> elseBody, Expression condition) {
+    public If(Integer line, Integer column, Expression condition,
+              List<Statement> ifBody, List<Statement> elseBody) {
         super(line, column);
         this.ifBody = ifBody;
         this.elseBody = elseBody;
@@ -25,9 +25,9 @@ public class If extends AbstractASTNode implements Statement {
     @Override
     public String toString() {
         return "If{" +
-                "ifBody=" + ifBody +
+                "condition=" + condition +
+                ", ifBody=" + ifBody +
                 ", elseBody=" + elseBody +
-                ", condition=" + condition +
                 '}';
     }
 

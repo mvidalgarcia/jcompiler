@@ -1,8 +1,7 @@
-package miw.ast.statements;
+package miw.ast.expressions;
 
 import miw.ast.AbstractASTNode;
-import miw.ast.expressions.Expression;
-import miw.ast.expressions.Identifier;
+import miw.ast.statements.Statement;
 import miw.visitor.Visitor;
 
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
 /**
  * Created by mvidalgarcia on 2/11/15.
  */
-public class Invocation extends AbstractASTNode implements Statement {
+public class InvocationExpression extends AbstractExpression implements Expression {
     public Identifier function;
     public List<Expression> arguments;
 
-    public Invocation(Integer line, Integer column, Identifier function, List<Expression> arguments) {
+    public InvocationExpression(Integer line, Integer column, Identifier function, List<Expression> arguments) {
         super(line, column);
         this.function = function;
         this.arguments = arguments;
@@ -22,7 +21,7 @@ public class Invocation extends AbstractASTNode implements Statement {
 
     @Override
     public String toString() {
-        return "Invocation{" +
+        return "InvocationExpression{" +
                 "function=" + function +
                 ", arguments=" + arguments +
                 '}';

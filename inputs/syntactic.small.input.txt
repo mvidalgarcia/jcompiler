@@ -1,13 +1,8 @@
-/*
-	Ejemplo de programa de entrada 
-*/
-
-int i,e,z;
-double j;
-int[10] v;
-
+//int a;
 void main() {
-  read i,e;
-  j = -((i-e)/2);
-  write j, v[i];
+    write 'c', 'i', 'e', 'r', 't', 'o';
+    if (n == vector[0][0] && !c)
+        write 'c', 'i', 'e', 'r', 't', 'o';
+    else
+        write 'f', 'a', 'l', 's', 'o', '\n';
 }

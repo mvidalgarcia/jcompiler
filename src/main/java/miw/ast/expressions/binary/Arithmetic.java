@@ -16,9 +16,7 @@ public class Arithmetic extends AbstractBinaryExpression implements Expression {
     @Override
     public String toString() {
         return "Arithmetic{" +
-                "line=" + line +
-                ", column=" + column +
-                ", leftExpression=" + leftExpression +
+                "leftExpression=" + leftExpression +
                 ", operator='" + operator + '\'' +
                 ", rightExpression=" + rightExpression+
                 '}';

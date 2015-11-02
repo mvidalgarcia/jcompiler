@@ -1,5 +1,9 @@
 // Mistaken program
 
+int f(){}
+int f2(){}
+int f(){} // Duplicated function
+
 void main() {
 	int i;
 	int j;

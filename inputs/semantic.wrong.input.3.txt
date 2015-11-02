@@ -3,9 +3,10 @@
 int f(){}
 int f2(){}
 int f(){} // Duplicated function
+int i;
 
 void main() {
-	int i;
+	//int i;
 	int j;
 	int i; // Duplicated variable
 	

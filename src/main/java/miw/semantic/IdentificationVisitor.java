@@ -1,6 +1,7 @@
 package miw.semantic;
 
 import miw.ast.expressions.Identifier;
+import miw.ast.statements.definitions.Definition;
 import miw.ast.statements.definitions.FunctionDef;
 import miw.ast.statements.definitions.VariableDef;
 import miw.ast.types.TypeError;
@@ -42,11 +43,14 @@ public class IdentificationVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Identifier identifier, Object params) {
-        if (symbolTable.search(identifier.name) == null)
+        Definition definition = symbolTable.search(identifier.name);
+        if (definition == null)
             new TypeError("Semantic error: \"" + identifier.name + "\" is not declared.",
                     identifier);
-        else
+        else {
+            identifier.definition = definition;
             super.visit(identifier, params);
+        }
         return null;
     }
 }

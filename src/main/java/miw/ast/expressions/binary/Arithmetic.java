@@ -1,6 +1,6 @@
-package miw.ast.expressions;
+package miw.ast.expressions.binary;
 
-import miw.ast.AbstractASTNode;
+import miw.ast.expressions.Expression;
 import miw.visitor.Visitor;
 
 /**

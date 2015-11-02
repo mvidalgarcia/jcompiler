@@ -1,9 +1,8 @@
 package miw.visitor;
 
-import miw.ast.ASTNode;
 import miw.ast.Program;
-import miw.ast.expressions.Arithmetic;
-import miw.ast.expressions.ArrayAccess;
+import miw.ast.expressions.binary.Arithmetic;
+import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.expressions.Identifier;
 import miw.ast.expressions.UnaryMinus;
 import miw.ast.expressions.literals.LiteralCharacter;

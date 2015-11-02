@@ -1,6 +1,6 @@
 package miw.semantic;
 
-import miw.ast.expressions.ArrayAccess;
+import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.expressions.Expression;
 import miw.ast.expressions.Identifier;
 import miw.ast.statements.Assignment;

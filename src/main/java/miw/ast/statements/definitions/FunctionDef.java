@@ -1,7 +1,6 @@
 package miw.ast.statements.definitions;
 
 import miw.ast.AbstractASTNode;
-import miw.ast.expressions.Arithmetic;
 import miw.ast.expressions.Identifier;
 import miw.ast.statements.Statement;
 import miw.ast.types.Type;

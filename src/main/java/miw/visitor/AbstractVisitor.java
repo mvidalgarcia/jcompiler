@@ -2,6 +2,8 @@ package miw.visitor;
 
 import miw.ast.Program;
 import miw.ast.expressions.*;
+import miw.ast.expressions.binary.Arithmetic;
+import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.expressions.literals.LiteralCharacter;
 import miw.ast.expressions.literals.LiteralDouble;
 import miw.ast.expressions.literals.LiteralInteger;

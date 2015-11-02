@@ -114,8 +114,8 @@ Trash = {LineComment}|{MultipleLineComment}|{EndLine}|[ \t\f]
 
 // * Characters
 '.'		{parser.setYylval(new Character(yycharat(1))); return Parser.CTE_CHARACTER; }
-'\\t'	{parser.setYylval(new Character(yycharat(1))); return new Character('\t'); }
-'\\n'	{parser.setYylval(new Character(yycharat(1))); return new Character('\n'); }
+'\\t'	{parser.setYylval('\t'); return Parser.CTE_CHARACTER; }
+'\\n'	{parser.setYylval('\n'); return Parser.CTE_CHARACTER; }
 // Ascii chars
 '\\{Digit}+' {parser.setYylval((char)Integer.parseInt(yytext().replace("\\", "").replace("\'", ""))); return Parser.CTE_CHARACTER; }
 

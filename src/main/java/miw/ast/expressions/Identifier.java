@@ -1,6 +1,5 @@
 package miw.ast.expressions;
 
-import miw.ast.AbstractASTNode;
 import miw.ast.statements.definitions.Definition;
 import miw.visitor.Visitor;
 
@@ -22,14 +21,15 @@ public class Identifier extends AbstractExpression implements Expression {
     }
 
 
-    @Override
-    public String toString() {
+
+    public String toStringM() {
         return "Identifier{" +
                 "name='" + name + '\'' +
                 '}';
     }
 
-    public String toStringMod() {
+    @Override
+    public String toString() {
         return name;
     }
 }

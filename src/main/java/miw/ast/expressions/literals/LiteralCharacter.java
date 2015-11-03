@@ -3,6 +3,7 @@ package miw.ast.expressions.literals;
 import miw.ast.AbstractASTNode;
 import miw.ast.expressions.AbstractExpression;
 import miw.ast.expressions.Expression;
+import miw.ast.types.TypeChar;
 import miw.visitor.Visitor;
 
 /**
@@ -14,6 +15,7 @@ public class LiteralCharacter extends AbstractExpression implements Expression {
     public LiteralCharacter(Integer line, Integer column, char value) {
         super(line, column);
         this.value = value;
+        this.type = TypeChar.getInstance(line, column);
     }
 
     public Object accept(Visitor visitor, Object params) {

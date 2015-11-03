@@ -1,12 +1,20 @@
 package miw.semantic;
 
+import miw.ast.expressions.binary.Arithmetic;
 import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.expressions.Expression;
 import miw.ast.expressions.Identifier;
+import miw.ast.expressions.binary.Comparison;
+import miw.ast.expressions.binary.Logic;
+import miw.ast.expressions.unary.Cast;
+import miw.ast.expressions.unary.Negation;
+import miw.ast.expressions.unary.UnaryMinus;
 import miw.ast.statements.Assignment;
 import miw.ast.statements.Reading;
 import miw.ast.types.TypeError;
+import miw.ast.types.TypeInteger;
 import miw.visitor.AbstractVisitor;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  * Created by mvidalgarcia on 31/10/15.
@@ -20,13 +28,88 @@ public class SemanticVisitor extends AbstractVisitor {
     public Object visit(Identifier identifier, Object params) {
         super.visit(identifier, params);
         identifier.setLvalue(true);
+        if (identifier.definition != null)
+            identifier.setType(identifier.definition.getType());
         return null;
     }
 
+    /* Expressions -> Binary */
     @Override
     public Object visit(ArrayAccess arrayAccess, Object params) {
         super.visit(arrayAccess, params);
         arrayAccess.setLvalue(true);
+        arrayAccess.setType(arrayAccess.leftExpression.getType().arrayAccess(arrayAccess.rightExpression.getType()));
+        if(arrayAccess.getType() == null)
+            arrayAccess.setType(new TypeError("Invalid array access, " +
+                    "index cannot be \'"+arrayAccess.rightExpression+"\'", arrayAccess));
+        return null;
+    }
+
+    @Override
+    public Object visit(Arithmetic arithmetic, Object params) {
+        super.visit(arithmetic, params);
+        arithmetic.setType(arithmetic.leftExpression.getType().arithmetic(arithmetic.rightExpression.getType()));
+        if(arithmetic.getType() == null)
+            arithmetic.setType(new TypeError("Arithmetic operation \'" + arithmetic.operator
+                    + "\' between \'" + arithmetic.leftExpression + "\' and \'" + arithmetic.rightExpression +
+                    "\' cannot be performed.", arithmetic));
+        return null;
+    }
+
+    @Override
+    public Object visit(Comparison comparison, Object params) {
+        super.visit(comparison, params);
+        comparison.setType(comparison.leftExpression.getType().comparison(comparison.rightExpression.getType()));
+        if(comparison.getType() == null)
+            comparison.setType(new TypeError("Comparison operation \'" + comparison.operator
+                    + "\' between \'" + comparison.leftExpression + "\' and \'" + comparison.rightExpression +
+                    "\' cannot be performed.", comparison));
+        return null;
+    }
+
+    @Override
+    public Object visit(Logic logic, Object params) {
+        super.visit(logic, params);
+        logic.setType(logic.leftExpression.getType().logic(logic.rightExpression.getType()));
+        if(logic.getType() == null)
+            logic.setType(new TypeError("Logic operation \'" + logic.operator
+                    + "\' between \'" + logic.leftExpression + "\' and \'" + logic.rightExpression +
+                    "\' cannot be performed.", logic));
+        return null;
+    }
+
+    /* Expressions -> Unary */
+    @Override
+    public Object visit(UnaryMinus unaryMinus, Object params) {
+        super.visit(unaryMinus, params);
+        if (unaryMinus.expression.getType() != null)
+            unaryMinus.setType(unaryMinus.expression.getType().arithmetic());
+        if(unaryMinus.getType() == null)
+            unaryMinus.setType(new TypeError("Arithmetic negation of \'"+ unaryMinus.expression +
+                    "\' cannot be performed.", unaryMinus));
+        return null;
+    }
+
+    @Override
+    public Object visit(Negation negation, Object params) {
+        super.visit(negation, params);
+        if (negation.expression.getType() != null)
+            negation.setType(negation.expression.getType().logic());
+        if(negation.getType() == null)
+            negation.setType(new TypeError("Logic negation of \'"+ negation.expression +
+                    "\' cannot be performed.", negation));
+        return null;
+    }
+
+    @Override
+    public Object visit(Cast cast, Object params) {
+        super.visit(cast, params);
+        int i = (char) 3;
+        if (cast.expression.getType() != null)
+            cast.setType(cast.expression.getType().castTo(cast.getType()));
+        if(cast.getType() == null)
+            cast.setType(new TypeError("Cast \'"+cast+"\' of \'"+
+                    cast.expression + "\' cannot be performed.", cast));
         return null;
     }
 
@@ -35,9 +118,14 @@ public class SemanticVisitor extends AbstractVisitor {
     @Override
     public Object visit(Assignment assignment, Object params) {
         super.visit(assignment, params);
+        /* lvalue check */
         if (!assignment.leftExpression.getLvalue()) {
             new TypeError("Semantic error: Lvalue expected.", assignment);
         }
+        /* types check */
+        if (assignment.leftExpression.getType().assignment(assignment.rightExpression.getType()) == null)
+            new TypeError("Assignment operation \'" + assignment.leftExpression + " = " +
+                    assignment.rightExpression + "\' cannot be performed.", assignment);
         return null;
     }
 

@@ -1,0 +1,14 @@
+// Mistaken program
+
+void main() {
+  	int entero;
+  	char caracter;
+	int [1] array;
+  	read entero;
+  	entero = array + 4; //Array and int cannot be added
+  	entero = -4;
+  	caracter = 'a' > 'b'; //Cannot assign int to char
+  	caracter = -array; //Cannot use unary minus in array
+  	entero = 'a' || 'b';
+  	caracter = 4 || 0; //Cannot assign int to char
+}

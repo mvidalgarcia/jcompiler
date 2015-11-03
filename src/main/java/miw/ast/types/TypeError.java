@@ -8,7 +8,7 @@ import miw.visitor.Visitor;
 /**
  * Created by mvidalgarcia on 27/10/15.
  */
-public class TypeError extends AbstractASTNode implements Type {
+public class TypeError extends AbstractType implements Type {
     public String description;
     public ASTNode astNode;
 

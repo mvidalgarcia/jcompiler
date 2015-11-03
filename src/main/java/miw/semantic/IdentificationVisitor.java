@@ -44,9 +44,10 @@ public class IdentificationVisitor extends AbstractVisitor {
     @Override
     public Object visit(Identifier identifier, Object params) {
         Definition definition = symbolTable.search(identifier.name);
-        if (definition == null)
+        if (definition == null) {
             new TypeError("Semantic error: \"" + identifier.name + "\" is not declared.",
                     identifier);
+        }
         else {
             identifier.definition = definition;
             super.visit(identifier, params);

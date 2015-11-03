@@ -39,9 +39,9 @@ public class Main {
 
         // Parse!
         parser.run();
-        System.out.println(parser.ast);
-        parser.ast.accept(new SemanticVisitor(), null);
+        // System.out.println(parser.ast);
         parser.ast.accept(new IdentificationVisitor(), null);
+        parser.ast.accept(new SemanticVisitor(), null);
 
         /*  Print errors */
         if (ErrorHandler.getInstance().areErrors()) {
@@ -49,8 +49,5 @@ public class Main {
                 System.err.println(error);
             }
         }
-
-
-
     }
 }

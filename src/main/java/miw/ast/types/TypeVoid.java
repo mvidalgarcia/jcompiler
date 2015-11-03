@@ -6,7 +6,7 @@ import miw.visitor.Visitor;
 /**
  * Created by mvidalgarcia on 28/10/15.
  */
-public class TypeVoid extends AbstractASTNode implements Type {
+public class TypeVoid extends AbstractType implements Type {
     private static TypeVoid instance;
     private TypeVoid(Integer line, Integer column){
         super(line, column);

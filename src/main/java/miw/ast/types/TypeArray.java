@@ -6,7 +6,7 @@ import miw.visitor.Visitor;
 /**
  * Created by mvidalgarcia on 28/10/15.
  */
-public class TypeArray extends AbstractASTNode implements Type {
+public class TypeArray extends AbstractType implements Type {
     public Integer size;
     public Type type;
 
@@ -22,6 +22,15 @@ public class TypeArray extends AbstractASTNode implements Type {
 
     public Object accept(Visitor visitor, Object params) {
         return visitor.visit(this, params);
+    }
+
+    @Override
+    public Type arrayAccess(Type type) {
+        if (type instanceof TypeError)
+            return type;
+        if (type instanceof TypeInteger || type instanceof TypeChar)
+            return this.type;
+        return null;
     }
 
     @Override

@@ -1,0 +1,10 @@
+// Mistaken program
+
+void main() {
+  	int entero;
+  	char caracter;
+  	read entero; 
+  	caracter = 850; //Cannot assign int to char
+  	3 = entero; // 3 is no lvalue
+  	read entero + 2; // integer + 2 is not lvalue
+}

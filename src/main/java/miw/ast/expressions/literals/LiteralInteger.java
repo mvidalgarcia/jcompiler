@@ -3,6 +3,7 @@ package miw.ast.expressions.literals;
 import miw.ast.AbstractASTNode;
 import miw.ast.expressions.AbstractExpression;
 import miw.ast.expressions.Expression;
+import miw.ast.types.TypeInteger;
 import miw.visitor.Visitor;
 
 /**
@@ -14,6 +15,7 @@ public class LiteralInteger extends AbstractExpression implements Expression {
     public LiteralInteger(Integer line, Integer column, Integer value) {
         super(line, column);
         this.value = value;
+        this.type = TypeInteger.getInstance(line, column);
     }
 
     @Override

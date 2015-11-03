@@ -115,8 +115,10 @@ public abstract class AbstractVisitor implements Visitor {
         for (Statement statement: ifStatement.ifBody)
             statement.accept(this, params);
 
-        for (Statement statement: ifStatement.elseBody)
-            statement.accept(this, params);
+        if(ifStatement.elseBody != null) {
+            for (Statement statement : ifStatement.elseBody)
+                statement.accept(this, params);
+        }
 
         ifStatement.condition.accept(this, params);
         return null;

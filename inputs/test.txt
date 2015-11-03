@@ -1,0 +1,25 @@
+void main() {
+int i;
+char c;
+double r;
+int[1] ai;
+
+int a;
+if (a == b) {
+}
+
+i = i+i;
+i = i+c;
+r = i+r;
+//ai = i+ai;
+//i = -ai;
+i = -1;
+i = -3;
+i = 'a' != 3;
+i = !(0 + 1);
+c = '\t';
+r = (int) 3;
+a = ai[3.3];
+a = ai[1];
+a = ai['x'];
+}

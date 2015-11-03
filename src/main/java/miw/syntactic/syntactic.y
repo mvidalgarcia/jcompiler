@@ -182,6 +182,7 @@ statement: expression '=' expression ';' { $$ = new Assignment(lexico.getLine(),
 
 block_body: '{' statements '}' { $$ = $2; }
            | statement { List<Statement> list = new ArrayList<Statement>(); list.add((Statement) $1); $$ = list; }
+           | '{' '}'   { $$ = new ArrayList<Statement>(); }
 
 expressions_opt: expressions { $$ = $1; }
                | { $$ = new ArrayList<Expression>(); }

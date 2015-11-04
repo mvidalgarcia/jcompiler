@@ -27,6 +27,10 @@ public class FunctionDef extends AbstractASTNode implements Statement, Definitio
         return type;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }

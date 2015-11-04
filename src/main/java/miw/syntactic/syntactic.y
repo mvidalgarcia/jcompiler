@@ -28,11 +28,11 @@ import java.util.*;
 %nonassoc LOWER_THAN_ELSE
 %nonassoc ELSE
 %right '='
-%left AND OR '!'
+%left AND OR
 %left '>' GTE '<' LTE NOTEQUAL EQUAL
 %left '+' '-'
 %left '*' '/' '%'
-%right UNARYMINUS
+%right UNARYMINUS '!'
 %nonassoc '[' ']'
 %nonassoc '(' ')'
 
@@ -239,8 +239,8 @@ private int yylex () {
     try { 
 	token=lexico.yylex(); 
     } catch(Throwable e) {
-	    System.err.println ("Error Léxico en línea " + lexico.getLine()+
-		" y columna "+lexico.getColumn()+":\n\t"+e);
+	    System.err.println ("Lexical error in line " + lexico.getLine()+
+		", column "+lexico.getColumn()+":\n\t"+e);
     }
     return token;
 }
@@ -248,8 +248,7 @@ private int yylex () {
 // * Syntactic error handling
 public void yyerror (String error) {
 	// Usar manejador de errores
-    System.err.println ("Syntactic error in line " + lexico.getLine()+
-		", column "+lexico.getColumn()+":\n\t"+error);
+    new TypeError(lexico.getLine(),lexico.getColumn(), "Syntactic error\n\t"+error);
 }
 
 // * Syntactic constructor

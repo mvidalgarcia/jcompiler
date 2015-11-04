@@ -10,10 +10,12 @@ import miw.ast.expressions.binary.Logic;
 import miw.ast.expressions.unary.Cast;
 import miw.ast.expressions.unary.Negation;
 import miw.ast.expressions.unary.UnaryMinus;
-import miw.ast.statements.Assignment;
-import miw.ast.statements.InvocationStatement;
-import miw.ast.statements.Reading;
+import miw.ast.statements.*;
+import miw.ast.statements.definitions.FunctionDef;
+import miw.ast.statements.definitions.VariableDef;
+import miw.ast.types.Type;
 import miw.ast.types.TypeError;
+import miw.ast.types.TypeFunction;
 import miw.ast.types.TypeInteger;
 import miw.visitor.AbstractVisitor;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
@@ -38,7 +40,8 @@ public class SemanticVisitor extends AbstractVisitor {
     @Override
     public Object visit(InvocationExpression invocationExpression, Object params) {
         super.visit(invocationExpression, params);
-        invocationExpression.setType(invocationExpression.function.getType().functionInvocation(invocationExpression.arguments));
+        if (invocationExpression.function.getType() != null)
+            invocationExpression.setType(invocationExpression.function.getType().functionInvocation(invocationExpression.arguments));
         if (invocationExpression.getType() == null)
             invocationExpression.setType(new TypeError("Function \'" + invocationExpression.function.name +
                     "\' cannot be invoked, parameters do not match.", invocationExpression));
@@ -50,7 +53,9 @@ public class SemanticVisitor extends AbstractVisitor {
     public Object visit(ArrayAccess arrayAccess, Object params) {
         super.visit(arrayAccess, params);
         arrayAccess.setLvalue(true);
-        arrayAccess.setType(arrayAccess.leftExpression.getType().arrayAccess(arrayAccess.rightExpression.getType()));
+        // To Avoid NullPointerException
+        if (arrayAccess.leftExpression.getType() != null && arrayAccess.rightExpression.getType() != null)
+            arrayAccess.setType(arrayAccess.leftExpression.getType().arrayAccess(arrayAccess.rightExpression.getType()));
         if (arrayAccess.getType() == null)
             arrayAccess.setType(new TypeError("Invalid array access, " +
                     "index cannot be \'"+arrayAccess.rightExpression+"\'", arrayAccess));
@@ -60,7 +65,9 @@ public class SemanticVisitor extends AbstractVisitor {
     @Override
     public Object visit(Arithmetic arithmetic, Object params) {
         super.visit(arithmetic, params);
-        arithmetic.setType(arithmetic.leftExpression.getType().arithmetic(arithmetic.rightExpression.getType()));
+        // To Avoid NullPointerException
+        if (arithmetic.leftExpression.getType() != null && arithmetic.rightExpression.getType() != null)
+            arithmetic.setType(arithmetic.leftExpression.getType().arithmetic(arithmetic.rightExpression.getType()));
         if(arithmetic.getType() == null)
             arithmetic.setType(new TypeError("Arithmetic operation \'" + arithmetic.operator
                     + "\' between \'" + arithmetic.leftExpression + "\' and \'" + arithmetic.rightExpression +
@@ -71,7 +78,8 @@ public class SemanticVisitor extends AbstractVisitor {
     @Override
     public Object visit(Comparison comparison, Object params) {
         super.visit(comparison, params);
-        comparison.setType(comparison.leftExpression.getType().comparison(comparison.rightExpression.getType()));
+        if (comparison.leftExpression.getType() != null && comparison.rightExpression.getType() != null)
+            comparison.setType(comparison.leftExpression.getType().comparison(comparison.rightExpression.getType()));
         if(comparison.getType() == null)
             comparison.setType(new TypeError("Comparison operation \'" + comparison.operator
                     + "\' between \'" + comparison.leftExpression + "\' and \'" + comparison.rightExpression +
@@ -82,6 +90,8 @@ public class SemanticVisitor extends AbstractVisitor {
     @Override
     public Object visit(Logic logic, Object params) {
         super.visit(logic, params);
+        // To Avoid NullPointerException
+        if (logic.leftExpression.getType() != null && logic.rightExpression.getType() != null)
         logic.setType(logic.leftExpression.getType().logic(logic.rightExpression.getType()));
         if(logic.getType() == null)
             logic.setType(new TypeError("Logic operation \'" + logic.operator
@@ -135,9 +145,12 @@ public class SemanticVisitor extends AbstractVisitor {
             new TypeError("Semantic error: Lvalue expected.", assignment);
         }
         /* types check */
-        if (assignment.leftExpression.getType().assignment(assignment.rightExpression.getType()) == null)
-            new TypeError("Assignment operation \'" + assignment.leftExpression + " = " +
-                    assignment.rightExpression + "\' cannot be performed.", assignment);
+        // To Avoid NullPointerException
+        if (assignment.leftExpression.getType() != null && assignment.rightExpression.getType() != null) {
+            if (assignment.leftExpression.getType().assignment(assignment.rightExpression.getType()) == null)
+                new TypeError("Assignment operation \'" + assignment.leftExpression + " = " +
+                        assignment.rightExpression + "\' cannot be performed.", assignment);
+        }
         return null;
     }
 
@@ -154,9 +167,67 @@ public class SemanticVisitor extends AbstractVisitor {
     @Override
     public Object visit(InvocationStatement invocationStatement, Object params) {
         super.visit(invocationStatement, params);
-        if (invocationStatement.function.getType().functionInvocation(invocationStatement.arguments) == null)
-            new TypeError("Function \'" + invocationStatement.function.name +
-                    "\' cannot be invoked, parameters do not match.", invocationStatement);
+        if (invocationStatement.function.getType() != null) {
+            if (invocationStatement.function.getType().functionInvocation(invocationStatement.arguments) == null)
+                new TypeError("Function \'" + invocationStatement.function.name +
+                        "\' cannot be invoked, parameters do not match.", invocationStatement);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visit(Return ret, Object params) {
+        ret.expression.accept(this, params);
+        if (params != null) {
+            if (!ret.expression.getType().promoteTo((Type) params)) // In params -> returnType
+                ret.expression.setType(new TypeError("Return type not compatible", ret));
+        }
+        return null;
+    }
+
+    @Override
+    public Object visit(If ifStatement, Object params) {
+        ifStatement.condition.accept(this, params);
+        if (ifStatement.condition.getType() != null) {
+            if (!ifStatement.condition.getType().isLogic())
+                ifStatement.condition.setType(new TypeError("'If' condition \'"+
+                        ifStatement.condition+"\' is no a logic expression.", ifStatement));
+        }
+        return null;
+    }
+
+    @Override
+    public Object visit(While whileStatement, Object params) {
+        whileStatement.condition.accept(this, params);
+        if (whileStatement.condition.getType() != null) {
+            if (!whileStatement.condition.getType().isLogic())
+                whileStatement.condition.setType(new TypeError("'While' condition \'"+
+                        whileStatement.condition+"\' is no a logic expression.", whileStatement));
+        }
+        return null;
+    }
+
+    /* Statements -> Definitions */
+    @Override
+    public Object visit(FunctionDef functionDef, Object params) {
+        super.visit(functionDef, params);
+        /* Check all function definitions but main() */
+        if (!functionDef.name.equals("main")) {
+
+            if (!((TypeFunction) functionDef.getType()).returnType.isBasicType())
+                functionDef.setType(new TypeError("Return type of function \'" + functionDef.name +
+                        "\' is not basic.", functionDef));
+
+            for (VariableDef paramDef : ((TypeFunction) functionDef.getType()).parameters) {
+                if (!paramDef.getType().isBasicType())
+                    functionDef.setType(new TypeError("Parameter \'" + paramDef.name +
+                            "\' of function \'" + functionDef.name + "\' is not basic.", functionDef));
+            }
+
+            for (Statement statement : functionDef.statements)
+                statement.accept(this, ((TypeFunction) functionDef.getType()).returnType);
+        }
+
         return null;
     }
 }

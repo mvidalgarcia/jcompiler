@@ -40,14 +40,14 @@ public class Main {
         // Parse!
         parser.run();
         // System.out.println(parser.ast);
-        parser.ast.accept(new IdentificationVisitor(), null);
-        parser.ast.accept(new SemanticVisitor(), null);
-
-        /*  Print errors */
-        if (ErrorHandler.getInstance().areErrors()) {
-            for (TypeError error : ErrorHandler.getInstance().errors) {
-                System.err.println(error);
-            }
+        if (!ErrorHandler.getInstance().areErrors()) {
+            parser.ast.accept(new IdentificationVisitor(), null);
+            parser.ast.accept(new SemanticVisitor(), null);
         }
+
+        /* Print all errors */
+       ErrorHandler.getInstance().printErrors(System.err);
+
+
     }
 }

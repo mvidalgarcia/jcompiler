@@ -1,14 +1,20 @@
-int f(int a, int b) {}
+int f(int a, int b) {
+int x;
+return x;
+}
 
 void main() {
-int i;
+int a, i;
+int x,b;
 char c;
 double r;
 int[1] ai;
 
-int a;
-if (a == b) {
-}
+if(!a == !b){}
+
+if(2.3){}
+
+while(ai){}
 
 i = i+i;
 i = i+c;

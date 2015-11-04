@@ -2,6 +2,7 @@ package miw.error;
 
 import miw.ast.types.TypeError;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +30,13 @@ public class ErrorHandler {
 
     public boolean areErrors() {
         return errors.size() > 0;
+    }
+
+    public void printErrors(PrintStream out) {
+        if (this.areErrors()) {
+            for (TypeError error : this.errors) {
+                out.println(error);
+            }
+        }
     }
 }

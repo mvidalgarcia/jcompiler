@@ -34,6 +34,14 @@ public class TypeChar extends AbstractType implements Type {
     }
 
     @Override
+    public boolean promoteTo(Type type)  {
+        if (type instanceof TypeDouble || type instanceof TypeInteger ||
+                type instanceof TypeError || type instanceof TypeChar)
+            return true;
+        return false;
+    }
+
+    @Override
     public Type arithmetic(Type type) {
         if (type instanceof TypeDouble || type instanceof TypeInteger || type instanceof TypeError)
             return type;

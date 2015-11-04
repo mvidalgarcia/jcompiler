@@ -21,6 +21,10 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
         return false;
     }
 
+    public boolean promoteTo(Type type)  {
+        return false;
+    }
+
     public Type arithmetic(Type type) {
         return null;
     }

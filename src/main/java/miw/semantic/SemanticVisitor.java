@@ -1,5 +1,6 @@
 package miw.semantic;
 
+import miw.ast.expressions.InvocationExpression;
 import miw.ast.expressions.binary.Arithmetic;
 import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.expressions.Expression;
@@ -10,6 +11,7 @@ import miw.ast.expressions.unary.Cast;
 import miw.ast.expressions.unary.Negation;
 import miw.ast.expressions.unary.UnaryMinus;
 import miw.ast.statements.Assignment;
+import miw.ast.statements.InvocationStatement;
 import miw.ast.statements.Reading;
 import miw.ast.types.TypeError;
 import miw.ast.types.TypeInteger;
@@ -33,13 +35,23 @@ public class SemanticVisitor extends AbstractVisitor {
         return null;
     }
 
+    @Override
+    public Object visit(InvocationExpression invocationExpression, Object params) {
+        super.visit(invocationExpression, params);
+        invocationExpression.setType(invocationExpression.function.getType().functionInvocation(invocationExpression.arguments));
+        if (invocationExpression.getType() == null)
+            invocationExpression.setType(new TypeError("Function \'" + invocationExpression.function.name +
+                    "\' cannot be invoked, parameters do not match.", invocationExpression));
+        return null;
+    }
+
     /* Expressions -> Binary */
     @Override
     public Object visit(ArrayAccess arrayAccess, Object params) {
         super.visit(arrayAccess, params);
         arrayAccess.setLvalue(true);
         arrayAccess.setType(arrayAccess.leftExpression.getType().arrayAccess(arrayAccess.rightExpression.getType()));
-        if(arrayAccess.getType() == null)
+        if (arrayAccess.getType() == null)
             arrayAccess.setType(new TypeError("Invalid array access, " +
                     "index cannot be \'"+arrayAccess.rightExpression+"\'", arrayAccess));
         return null;
@@ -136,6 +148,15 @@ public class SemanticVisitor extends AbstractVisitor {
             if (!expression.getLvalue())
                 new TypeError("Semantic error: Lvalue expected.", reading);
         }
+        return null;
+    }
+
+    @Override
+    public Object visit(InvocationStatement invocationStatement, Object params) {
+        super.visit(invocationStatement, params);
+        if (invocationStatement.function.getType().functionInvocation(invocationStatement.arguments) == null)
+            new TypeError("Function \'" + invocationStatement.function.name +
+                    "\' cannot be invoked, parameters do not match.", invocationStatement);
         return null;
     }
 }

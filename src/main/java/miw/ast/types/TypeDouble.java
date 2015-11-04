@@ -29,6 +29,13 @@ public class TypeDouble extends AbstractType implements Type {
     }
 
     @Override
+    public boolean promoteTo(Type type)  {
+        if (type instanceof TypeDouble || type instanceof TypeError)
+            return true;
+        return false;
+    }
+
+    @Override
     public Type arithmetic(Type type) {
         if (type instanceof TypeDouble || type instanceof TypeError)
             return type;

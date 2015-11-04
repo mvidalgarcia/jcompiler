@@ -11,6 +11,7 @@ import java.util.List;
 public interface Type extends ASTNode {
     boolean isLogic();
     boolean isBasicType();
+    boolean promoteTo(Type type);
     Type arithmetic(Type type); // Binary
     Type arithmetic(); // Unary
     Type comparison(Type type);

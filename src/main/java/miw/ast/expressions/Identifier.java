@@ -20,8 +20,6 @@ public class Identifier extends AbstractExpression implements Expression {
         return visitor.visit(this, params);
     }
 
-
-
     public String toStringM() {
         return "Identifier{" +
                 "name='" + name + '\'' +

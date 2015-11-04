@@ -25,7 +25,12 @@ public class TypeFunction extends AbstractType implements Type {
 
     @Override
     public Type functionInvocation(List<Expression> expressions) {
-        return null;
+        if (expressions.size() != this.parameters.size())
+            return null;
+        for (int i=0; i < expressions.size(); i++)
+            if (!expressions.get(i).getType().promoteTo(this.parameters.get(i).getType()))
+                return null;
+        return this.returnType;
     }
 
     @Override

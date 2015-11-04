@@ -42,8 +42,8 @@ public class SymbolTable {
     }
 
     public void reset() {
-        scope--;
         table.remove(scope);
+        scope--;
     }
 
     @Override

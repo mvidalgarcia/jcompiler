@@ -92,6 +92,10 @@ public class TypeInteger extends AbstractType implements Type {
         return null;
     }
 
+    public int size() {
+        return 2;
+    }
+
     @Override
     public String toString() {
         return "TypeInteger{}";

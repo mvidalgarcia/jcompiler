@@ -1,4 +1,8 @@
-int f(int a, int b) {
+char carac;
+double dou;
+double[3] ai;
+char carac2;
+int f(int a, char b, double z) {
 int x;
 return x;
 }

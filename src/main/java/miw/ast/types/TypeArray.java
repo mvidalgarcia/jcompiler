@@ -15,7 +15,7 @@ public class TypeArray extends AbstractType implements Type {
         this.size = size;
         this.type = type;
     }
-
+    // TODO: Invert array dimensions
 //    public static TypeArray newArray(Type type, Integer size) {
 //
 //    }
@@ -31,6 +31,10 @@ public class TypeArray extends AbstractType implements Type {
         if (type instanceof TypeInteger || type instanceof TypeChar)
             return this.type;
         return null;
+    }
+
+    public int size() {
+        return this.type.size() * this.size;
     }
 
     @Override

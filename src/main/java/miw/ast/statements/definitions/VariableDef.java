@@ -12,8 +12,8 @@ import miw.visitor.Visitor;
 public class VariableDef extends AbstractASTNode implements Statement, Definition {
     public Type type;
     public String name;
-    public Integer offset;
-    public Integer scope;
+    public int offset;
+    public int scope;
 
     public VariableDef(Integer line, Integer column, Type type, String name) {
         super(line, column);

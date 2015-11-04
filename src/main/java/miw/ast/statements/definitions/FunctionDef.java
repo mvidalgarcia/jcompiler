@@ -15,6 +15,7 @@ public class FunctionDef extends AbstractASTNode implements Statement, Definitio
     public List<Statement> statements;
     public Type type;
     public String name;
+    public int localVariablesOffset;
 
     public FunctionDef(Integer line, Integer column, Type type, String name, List<Statement> statements) {
         super(line, column);

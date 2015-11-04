@@ -1,5 +1,6 @@
 package miw;
 
+import miw.codegeneration.OffsetVisitor;
 import miw.error.ErrorHandler;
 import miw.ast.types.TypeError;
 import miw.lexical.Lexical;
@@ -44,6 +45,7 @@ public class Main {
             parser.ast.accept(new IdentificationVisitor(), null);
             parser.ast.accept(new SemanticVisitor(), null);
         }
+        parser.ast.accept(new OffsetVisitor(), null);
 
         /* Print all errors */
        ErrorHandler.getInstance().printErrors(System.err);

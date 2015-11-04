@@ -73,6 +73,10 @@ public class TypeDouble extends AbstractType implements Type {
         return null;
     }
 
+    public int size() {
+        return 4;
+    }
+
     @Override
     public String toString() {
         return "TypeDouble{}";

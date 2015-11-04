@@ -21,4 +21,6 @@ public interface Type extends ASTNode {
     Type castTo(Type type);
     Type arrayAccess(Type type);
     Type functionInvocation(List<Expression> expressions);
+    // Size in bytes of a certain type
+    int size();
 }

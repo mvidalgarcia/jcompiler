@@ -60,4 +60,8 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public Type functionInvocation(List<Expression> expressions) {
         return null;
     }
+
+    public int size() {
+        return 0;
+    }
 }

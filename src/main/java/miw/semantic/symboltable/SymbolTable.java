@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class SymbolTable {
     public List<Map<String, Definition>> table;
-    public Integer scope = 0;
+    public int scope = 0;
 
     public SymbolTable() {
         table = new ArrayList<Map<String, Definition>>();

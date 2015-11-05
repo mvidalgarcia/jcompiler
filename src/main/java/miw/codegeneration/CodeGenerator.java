@@ -57,6 +57,22 @@ public class CodeGenerator {
         write("\tadd" + type.suffix());
     }
 
+    public void sub(Type type) {
+        write("\tsub" + type.suffix());
+    }
+
+    public void mul(Type type) {
+        write("\tmul" + type.suffix());
+    }
+
+    public void div(Type type) {
+        write("\tdiv" + type.suffix());
+    }
+
+    public void mod() {
+        write("\tmodi");
+    }
+
     public void out(Type type) {
         write("\tout" + type.suffix());
     }
@@ -85,15 +101,78 @@ public class CodeGenerator {
         write("#line\t" + line);
     }
 
-    public void source(String fileName) {
-        write("#source\t\"" + fileName + "\"");
+    public void source(String path) {
+        write("#source\t\"" + path + "\"");
     }
 
     public void emptyLine() {
         write("");
     }
 
-    public void varDef(Type type, String name, int offset) {
+    public void varDefcomment(Type type, String name, int offset) {
         comment(type.toStringCG() + " " + name + " " + "(offset " + offset + ")");
+    }
+
+    public void arithmetic(String operator, Type type) {
+        switch (operator) {
+            case "+":
+                add(type);
+                break;
+            case "-":
+                sub(type);
+                break;
+            case "*":
+                mul(type);
+                break;
+            case "/":
+                div(type);
+                break;
+            case "%":
+                mod();
+                break;
+        }
+    }
+
+    public void transformType(Type t1, Type t2) {
+        char t1S = t1.suffix().charAt(0);
+        char t2S = t2.suffix().charAt(0);
+
+        switch (t1S) {
+            case 'i':
+                if (t2S == 'b')
+                    i2b();
+                else if (t1S == 'f')
+                    i2f();
+                break;
+            case 'b':
+                if (t2S == 'i')
+                    b2i();
+                else if (t2S == 'f') {
+                    b2i();
+                    i2f();
+                }
+                break;
+            case 'f':
+                if (t2S == 'i')
+                    f2i();
+                else if (t2S == 'b') {
+                    f2i();
+                    i2b();
+                }
+                break;
+        }
+    }
+
+    private void b2i() {
+        write("\tb2i");
+    }
+    private void i2f() {
+        write("\ti2f");
+    }
+    private void f2i() {
+        write("\tf2i");
+    }
+    private void i2b() {
+        write("\tb2i");
     }
 }

@@ -218,16 +218,23 @@ public class SemanticVisitor extends AbstractVisitor {
                 functionDef.setType(new TypeError("Return type of function \'" + functionDef.name +
                         "\' is not basic.", functionDef));
 
-            else {
-                for (VariableDef paramDef : ((TypeFunction) functionDef.getType()).parameters) {
-                    if (!paramDef.getType().isBasicType())
-                        functionDef.setType(new TypeError("Parameter \'" + paramDef.name +
-                                "\' of function \'" + functionDef.name + "\' is not basic.", functionDef));
-                }
-
-                for (Statement statement : functionDef.statements)
-                    statement.accept(this, ((TypeFunction) functionDef.getType()).returnType);
+            for (VariableDef paramDef : ((TypeFunction) functionDef.getType()).parameters) {
+                if (!paramDef.getType().isBasicType())
+                    functionDef.setType(new TypeError("Parameter \'" + paramDef.name +
+                            "\' of function \'" + functionDef.name + "\' is not basic.", functionDef));
             }
+
+            boolean hasReturnStatement = false;
+            for (Statement statement : functionDef.statements) {
+                statement.accept(this, ((TypeFunction) functionDef.getType()).returnType);
+                if (statement instanceof Return)
+                    hasReturnStatement = true;
+            }
+            if (!hasReturnStatement) {
+                functionDef.setType(new TypeError("Function '" + functionDef.name +
+                        "' has not return statement", functionDef));
+            }
+
         }
 
         return null;

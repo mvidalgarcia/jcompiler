@@ -111,4 +111,10 @@ public class TypeChar extends AbstractType implements Type {
     public String toStringCG() {
         return "char";
     }
+
+    public Type mayorTipo(Type type) {
+        if (type instanceof  TypeInteger || type instanceof TypeDouble)
+            return type;
+        return this;
+    }
 }

@@ -8,11 +8,11 @@ import miw.visitor.Visitor;
 public class TypeChar extends AbstractType implements Type {
     private static TypeChar instance;
 
-    private TypeChar(Integer line, Integer column){
+    private TypeChar(Integer line, Integer column) {
         super(line, column);
     }
 
-    public static TypeChar getInstance(Integer line, Integer column){
+    public static TypeChar getInstance(Integer line, Integer column) {
         if (instance == null) {
             instance = new TypeChar(line, column);
         }
@@ -34,7 +34,7 @@ public class TypeChar extends AbstractType implements Type {
     }
 
     @Override
-    public boolean promoteTo(Type type)  {
+    public boolean promoteTo(Type type) {
         if (type instanceof TypeDouble || type instanceof TypeInteger ||
                 type instanceof TypeError || type instanceof TypeChar)
             return true;
@@ -45,7 +45,7 @@ public class TypeChar extends AbstractType implements Type {
     public Type arithmetic(Type type) {
         if (type instanceof TypeDouble || type instanceof TypeInteger || type instanceof TypeError)
             return type;
-        if (type instanceof TypeChar )
+        if (type instanceof TypeChar)
             return TypeInteger.getInstance(type.getLine(), type.getLine());
         return null;
     }
@@ -65,7 +65,8 @@ public class TypeChar extends AbstractType implements Type {
     @Override
     public Type logic(Type type) {
         if (type instanceof TypeInteger || type instanceof TypeChar)
-            return TypeInteger.getInstance(this.getLine(), this.getColumn());;
+            return TypeInteger.getInstance(this.getLine(), this.getColumn());
+        ;
         return null;
     }
 
@@ -91,12 +92,23 @@ public class TypeChar extends AbstractType implements Type {
         return null;
     }
 
+    /* Size of one char in bytes */
     public int size() {
         return 1;
+    }
+
+    /* Suffix needed to generate code */
+    public String suffix() {
+        return "b";
     }
 
     @Override
     public String toString() {
         return "TypeChar{}";
+    }
+
+    @Override
+    public String toStringCG() {
+        return "char";
     }
 }

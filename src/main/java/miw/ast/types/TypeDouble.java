@@ -73,12 +73,23 @@ public class TypeDouble extends AbstractType implements Type {
         return null;
     }
 
+    /* Size of one double in bytes */
     public int size() {
         return 4;
+    }
+
+    /* Suffix needed to generate code */
+    public String suffix() {
+        return "f";
     }
 
     @Override
     public String toString() {
         return "TypeDouble{}";
+    }
+
+    @Override
+    public String toStringCG() {
+        return "double";
     }
 }

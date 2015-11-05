@@ -1,5 +1,6 @@
 package miw;
 
+import miw.codegeneration.ExecuteCGVisitor;
 import miw.codegeneration.OffsetVisitor;
 import miw.error.ErrorHandler;
 import miw.ast.types.TypeError;
@@ -45,7 +46,11 @@ public class Main {
             parser.ast.accept(new IdentificationVisitor(), null);
             parser.ast.accept(new SemanticVisitor(), null);
         }
-        parser.ast.accept(new OffsetVisitor(), null);
+
+        if (!ErrorHandler.getInstance().areErrors()) {
+            parser.ast.accept(new OffsetVisitor(), null);
+            parser.ast.accept(new ExecuteCGVisitor(), null);
+        }
 
         /* Print all errors */
        ErrorHandler.getInstance().printErrors(System.err);

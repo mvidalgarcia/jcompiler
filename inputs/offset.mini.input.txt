@@ -1,5 +1,5 @@
 /**
- * Programa de prueba. 
+ * Test program.
  */
 void main() {
  int a,b;

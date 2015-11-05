@@ -92,12 +92,23 @@ public class TypeInteger extends AbstractType implements Type {
         return null;
     }
 
+    /* Size of one integer in bytes */
     public int size() {
         return 2;
+    }
+
+    /* Suffix needed to generate code */
+    public String suffix() {
+        return "i";
     }
 
     @Override
     public String toString() {
         return "TypeInteger{}";
+    }
+
+    @Override
+    public String toStringCG() {
+        return "integer";
     }
 }

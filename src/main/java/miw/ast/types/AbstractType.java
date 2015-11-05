@@ -64,4 +64,12 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public int size() {
         return 0;
     }
+
+    public String suffix() {
+        return null;
+    }
+
+    public String toStringCG() {
+        return null;
+    }
 }

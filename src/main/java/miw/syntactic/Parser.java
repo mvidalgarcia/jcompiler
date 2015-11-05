@@ -581,7 +581,7 @@ final static String yyrule[] = {
 "ctes : CTE_CHARACTER",
 };
 
-//#line 226 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 228 "../src/main/java/miw/syntactic/syntactic.y"
 
 /**
 * Lexical analyzer reference
@@ -962,175 +962,177 @@ case 31:
 break;
 case 32:
 //#line 162 "../src/main/java/miw/syntactic/syntactic.y"
-{ yyval = new FunctionDef(lexico.getLine(), lexico.getColumn(),
-                                                TypeVoid.getInstance(lexico.getLine(), lexico.getColumn()),
+{ Type typeMain = new TypeFunction(lexico.getLine(), lexico.getColumn(),
+                                                TypeVoid.getInstance(lexico.getLine(), lexico.getColumn()), new ArrayList<VariableDef>());
+                                                yyval = new FunctionDef(lexico.getLine(), lexico.getColumn(),
+                                                typeMain,
                                                 "main", (List<Statement>) val_peek(1)); }
 break;
 case 33:
-//#line 166 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 168 "../src/main/java/miw/syntactic/syntactic.y"
 { List<Statement> list = new ArrayList<Statement>(); list.add((Statement) val_peek(0)); yyval = list; }
 break;
 case 34:
-//#line 167 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 169 "../src/main/java/miw/syntactic/syntactic.y"
 { List<Statement> list = (List<Statement>) val_peek(1); list.add((Statement) val_peek(0)); yyval = list; }
 break;
 case 35:
-//#line 170 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 172 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Assignment(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(3), (Expression) val_peek(1)); }
 break;
 case 36:
-//#line 171 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 173 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Writing(lexico.getLine(), lexico.getColumn(), (List) val_peek(1)); }
 break;
 case 37:
-//#line 172 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 174 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Reading(lexico.getLine(), lexico.getColumn(), (List) val_peek(1)); }
 break;
 case 38:
-//#line 174 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 176 "../src/main/java/miw/syntactic/syntactic.y"
 { Identifier identifier = new Identifier(lexico.getLine(), lexico.getColumn(), (String) val_peek(4));
                                                 List<Expression> expressions = (List<Expression>)val_peek(2);
                                                 yyval = new InvocationStatement(lexico.getLine(), lexico.getColumn(), identifier, expressions); }
 break;
 case 39:
-//#line 177 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 179 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Return(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(1)); }
 break;
 case 40:
-//#line 178 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 180 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new While(lexico.getLine(), lexico.getColumn(), (Expression)val_peek(2), (List<Statement>)val_peek(0)); }
 break;
 case 41:
-//#line 179 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 181 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new If(lexico.getLine(), lexico.getColumn(), (Expression)val_peek(4), (List<Statement>)val_peek(2), (List<Statement>)val_peek(0)); }
 break;
 case 42:
-//#line 180 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 182 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new If(lexico.getLine(), lexico.getColumn(), (Expression)val_peek(2), (List<Statement>)val_peek(0), null); }
 break;
 case 43:
-//#line 183 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 185 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = val_peek(1); }
 break;
 case 44:
-//#line 184 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 186 "../src/main/java/miw/syntactic/syntactic.y"
 { List<Statement> list = new ArrayList<Statement>(); list.add((Statement) val_peek(0)); yyval = list; }
 break;
 case 45:
-//#line 185 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 187 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new ArrayList<Statement>(); }
 break;
 case 46:
-//#line 187 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 189 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = val_peek(0); }
 break;
 case 47:
-//#line 188 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 190 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new ArrayList<Expression>(); }
 break;
 case 48:
-//#line 191 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 193 "../src/main/java/miw/syntactic/syntactic.y"
 { List<Expression> list = new ArrayList<Expression>(); list.add((Expression) val_peek(0)); yyval = list; }
 break;
 case 49:
-//#line 192 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 194 "../src/main/java/miw/syntactic/syntactic.y"
 { List<Expression> list = (List<Expression>)val_peek(2); list.add((Expression) val_peek(0)); yyval = list; }
 break;
 case 50:
-//#line 195 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 197 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Identifier(lexico.getLine(), lexico.getColumn(), (String) val_peek(0)); }
 break;
 case 52:
-//#line 197 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 199 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "+", (Expression) val_peek(0)); }
 break;
 case 53:
-//#line 198 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 200 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "-", (Expression) val_peek(0)); }
 break;
 case 54:
-//#line 199 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 201 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "*", (Expression) val_peek(0)); }
 break;
 case 55:
-//#line 200 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 202 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "/", (Expression) val_peek(0)); }
 break;
 case 56:
-//#line 201 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 203 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Arithmetic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "%", (Expression) val_peek(0)); }
 break;
 case 57:
-//#line 202 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 204 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new UnaryMinus(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(0)); }
 break;
 case 58:
-//#line 203 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 205 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new ArrayAccess(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(3), (Expression) val_peek(1)); }
 break;
 case 59:
-//#line 204 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 206 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = val_peek(1); }
 break;
 case 60:
-//#line 205 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 207 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Cast(lexico.getLine(), lexico.getColumn(), (Type)val_peek(2), (Expression)val_peek(0)); }
 break;
 case 61:
-//#line 206 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 208 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Comparison(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "<", (Expression) val_peek(0)); }
 break;
 case 62:
-//#line 207 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 209 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Comparison(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), ">", (Expression) val_peek(0)); }
 break;
 case 63:
-//#line 208 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 210 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Comparison(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "<=", (Expression) val_peek(0)); }
 break;
 case 64:
-//#line 209 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 211 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Comparison(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), ">=", (Expression) val_peek(0)); }
 break;
 case 65:
-//#line 210 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 212 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Comparison(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "==", (Expression) val_peek(0)); }
 break;
 case 66:
-//#line 211 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 213 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Comparison(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "!=", (Expression) val_peek(0)); }
 break;
 case 67:
-//#line 212 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 214 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Logic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "&&", (Expression) val_peek(0)); }
 break;
 case 68:
-//#line 213 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 215 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Logic(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(2), "||", (Expression) val_peek(0)); }
 break;
 case 69:
-//#line 214 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 216 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new Negation(lexico.getLine(), lexico.getColumn(), (Expression) val_peek(0)); }
 break;
 case 70:
-//#line 216 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 218 "../src/main/java/miw/syntactic/syntactic.y"
 { Identifier identifier = new Identifier(lexico.getLine(), lexico.getColumn(), (String) val_peek(3));
                                                     List<Expression> expressions = (List<Expression>)val_peek(1);
                                                     yyval = new InvocationExpression(lexico.getLine(), lexico.getColumn(), identifier, expressions); }
 break;
 case 71:
-//#line 221 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 223 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new LiteralInteger(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(0)); }
 break;
 case 72:
-//#line 222 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 224 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new LiteralDouble(lexico.getLine(), lexico.getColumn(), (Double) val_peek(0)); }
 break;
 case 73:
-//#line 223 "../src/main/java/miw/syntactic/syntactic.y"
+//#line 225 "../src/main/java/miw/syntactic/syntactic.y"
 { yyval = new LiteralCharacter(lexico.getLine(), lexico.getColumn(), (Character)val_peek(0)); }
 break;
-//#line 1065 "Parser.java"
+//#line 1067 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

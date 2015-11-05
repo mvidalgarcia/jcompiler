@@ -23,4 +23,8 @@ public interface Type extends ASTNode {
     Type functionInvocation(List<Expression> expressions);
     // Size in bytes of a certain type
     int size();
+    // Suffix for code generation
+    String suffix();
+    String toStringCG();
+
 }

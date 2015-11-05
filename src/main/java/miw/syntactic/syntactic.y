@@ -159,8 +159,10 @@ statements_opt: statements { $$ = $1; }
               | { $$ = new ArrayList<Statement>(); }
               ;
 
-main: VOID MAIN '(' ')' '{' func_body '}' { $$ = new FunctionDef(lexico.getLine(), lexico.getColumn(),
-                                                TypeVoid.getInstance(lexico.getLine(), lexico.getColumn()),
+main: VOID MAIN '(' ')' '{' func_body '}' { Type typeMain = new TypeFunction(lexico.getLine(), lexico.getColumn(),
+                                                TypeVoid.getInstance(lexico.getLine(), lexico.getColumn()), new ArrayList<VariableDef>());
+                                                $$ = new FunctionDef(lexico.getLine(), lexico.getColumn(),
+                                                typeMain,
                                                 "main", (List<Statement>) $6); }
 
 statements: statement { List<Statement> list = new ArrayList<Statement>(); list.add((Statement) $1); $$ = list; }

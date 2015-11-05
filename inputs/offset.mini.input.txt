@@ -1,0 +1,9 @@
+/**
+ * Programa de prueba. 
+ */
+void main() {
+ int a,b;
+ read b;
+ a = b+3;
+ write a;
+}

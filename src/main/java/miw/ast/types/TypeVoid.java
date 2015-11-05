@@ -1,6 +1,5 @@
 package miw.ast.types;
 
-import miw.ast.AbstractASTNode;
 import miw.visitor.Visitor;
 
 /**
@@ -19,6 +18,11 @@ public class TypeVoid extends AbstractType implements Type {
         return instance;
     }
 
+    @Override
+    public boolean isBasicType() {
+        return true;
+    }
+
     public Object accept(Visitor visitor, Object params) {
         return visitor.visit(this, params);
     }
@@ -26,5 +30,10 @@ public class TypeVoid extends AbstractType implements Type {
     @Override
     public String toString() {
         return "TypeVoid{}";
+    }
+
+    /* Size of one integer in bytes */
+    public int size() {
+        return 0;
     }
 }

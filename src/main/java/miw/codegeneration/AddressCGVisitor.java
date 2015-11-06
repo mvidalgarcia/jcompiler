@@ -4,6 +4,7 @@ import miw.ast.expressions.Identifier;
 import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.statements.definitions.VariableDef;
 import miw.ast.types.Type;
+import miw.ast.types.TypeArray;
 import miw.ast.types.TypeInteger;
 import miw.visitor.AbstractCGVisitor;
 
@@ -12,10 +13,15 @@ import miw.visitor.AbstractCGVisitor;
  */
 public class AddressCGVisitor extends AbstractCGVisitor {
     private CodeGenerator codeGen = new CodeGenerator();
+    private ValueCGVisitor valueCGVisitor;
+
+    public void setValueCGVisitor (ValueCGVisitor v) {
+        this.valueCGVisitor = v;
+    }
 
     public Object visit(Identifier identifier, Object params) {
         if (identifier.definition.getScope() == 0) // Global
-            codeGen.push( ((VariableDef)identifier.definition).offset );
+            codeGen.pusha( ((VariableDef)identifier.definition).offset );
         else {
             codeGen.pushBP();
             codeGen.push( ((VariableDef)identifier.definition).offset );
@@ -25,11 +31,13 @@ public class AddressCGVisitor extends AbstractCGVisitor {
     }
 
     public Object visit(ArrayAccess arrayAccess, Object params) {
-        /*
-         * op1.accept(this)
-         * op2.accept(visitorValor)
-         * gc.convertirA
-         */
+        arrayAccess.leftExpression.accept(this, params);
+        arrayAccess.rightExpression.accept(valueCGVisitor, params);
+        codeGen.transformType(arrayAccess.rightExpression.getType(),
+                TypeInteger.getInstance(arrayAccess.getLine(), arrayAccess.getColumn()));
+        codeGen.push( ((TypeArray)(arrayAccess.leftExpression.getType())).type.size() );
+        codeGen.muli();
+        codeGen.addi();
         return null;
     }
 

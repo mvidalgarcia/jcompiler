@@ -16,16 +16,22 @@ void main() {
 	
 	read valor;
 		
-	i=0;	
+	i=0;
+
 	while (i<10) {
+
 		v[i]=valor; // * lvalue
 		write i,':',v[i], ' ';
+        /* TODO: NEXT!
 		if (i%2)
 			write 'i','m','p','a','r','\n';
 		else 
 			write 'p','a','r','\n';
 		i=i+1;
+        */
 	}
+
+	/*
 	write '\n';
 
 	i=0;
@@ -39,6 +45,7 @@ void main() {
 		write '\n';
 		i=i+1;
 	}
+	*/
 
 }
 	

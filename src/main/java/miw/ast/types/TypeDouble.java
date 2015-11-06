@@ -92,4 +92,9 @@ public class TypeDouble extends AbstractType implements Type {
     public String toStringCG() {
         return "double";
     }
+
+    @Override
+    public Type greaterType(Type type) {
+        return this;
+    }
 }

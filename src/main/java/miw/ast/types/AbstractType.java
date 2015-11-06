@@ -72,4 +72,8 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public String toStringCG() {
         return null;
     }
+
+    public Type greaterType(Type type) {
+        return null;
+    }
 }

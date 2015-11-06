@@ -1,6 +1,7 @@
 package miw.codegeneration;
 
 import miw.ast.types.Type;
+import miw.ast.types.TypeArray;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -30,7 +31,7 @@ public class CodeGenerator {
     }
 
     public void push(char c) {
-        write("\tpushb\t" + c);
+        write("\tpushb\t" + (int)c);
     }
 
     public void push(int i) {
@@ -57,6 +58,10 @@ public class CodeGenerator {
         write("\tadd" + type.suffix());
     }
 
+    public void addi() {
+        write("\taddi");
+    }
+
     public void sub(Type type) {
         write("\tsub" + type.suffix());
     }
@@ -65,12 +70,52 @@ public class CodeGenerator {
         write("\tmul" + type.suffix());
     }
 
+    public void muli() {
+        write("\tmuli");
+    }
+
     public void div(Type type) {
         write("\tdiv" + type.suffix());
     }
 
     public void mod() {
         write("\tmodi");
+    }
+
+    public void gt(Type type) {
+        write("\tgt" + type.suffix());
+    }
+
+    public void lt(Type type) {
+        write("\tlt" + type.suffix());
+    }
+
+    public void ge(Type type) {
+        write("\tge" + type.suffix());
+    }
+
+    public void le(Type type) {
+        write("\tle" + type.suffix());
+    }
+
+    public void ne(Type type) {
+        write("\tne" + type.suffix());
+    }
+
+    public void eq(Type type) {
+        write("\teq" + type.suffix());
+    }
+
+    public void and() {
+        write("\tand");
+    }
+
+    public void or() {
+        write("\tor");
+    }
+
+    public void not() {
+        write("\tnot");
     }
 
     public void out(Type type) {
@@ -87,6 +132,10 @@ public class CodeGenerator {
 
     public void ret(int bytesReturned, int bytesLocalVars, int bytesParams) {
         write("\tret\t" + bytesReturned + ", " + bytesLocalVars + ", " + bytesParams);
+    }
+
+    public void jz(String label) {
+        write("\tjz\t" + label);
     }
 
     public void label(String label) {
@@ -109,8 +158,28 @@ public class CodeGenerator {
         write("");
     }
 
-    public void varDefcomment(Type type, String name, int offset) {
-        comment(type.toStringCG() + " " + name + " " + "(offset " + offset + ")");
+    public String varDef(Type type, String name, int offset) {
+        String s = "";
+        if (type instanceof TypeArray) {
+
+            if (((TypeArray) type).type instanceof TypeArray) {
+                s += "[" + ((TypeArray) type).size + ",";
+                s += varDef(((TypeArray) type).type, name, offset);
+                s += "] ";
+            }
+            else {
+                s += "[" + ((TypeArray) type).size + "," + ((TypeArray) type).type.toStringCG() +
+                        "] "  + name + " (offset " + offset + ")";;
+            }
+        }
+        else
+            s += type.toStringCG() + " " + name + " " + "(offset " + offset + ")";
+
+        return s;
+    }
+
+    public void varDefComment(Type type, String name, int offset) {
+        comment(varDef(type, name, offset));
     }
 
     public void arithmetic(String operator, Type type) {
@@ -133,6 +202,39 @@ public class CodeGenerator {
         }
     }
 
+    public void comparison(String operator, Type type) {
+        switch (operator) {
+            case ">":
+                gt(type);
+                break;
+            case "<":
+                lt(type);
+                break;
+            case ">=":
+                ge(type);
+                break;
+            case "<=":
+                le(type);
+                break;
+            case "!=":
+                ne(type);
+                break;
+            case "==":
+                eq(type);
+                break;
+        }
+    }
+    public void logic(String operator) {
+        switch (operator) {
+            case "&&":
+                and();
+                break;
+            case "||":
+                or();
+                break;
+        }
+    }
+
     public void transformType(Type t1, Type t2) {
         char t1S = t1.suffix().charAt(0);
         char t2S = t2.suffix().charAt(0);
@@ -141,7 +243,7 @@ public class CodeGenerator {
             case 'i':
                 if (t2S == 'b')
                     i2b();
-                else if (t1S == 'f')
+                else if (t2S == 'f')
                     i2f();
                 break;
             case 'b':

@@ -111,4 +111,12 @@ public class TypeInteger extends AbstractType implements Type {
     public String toStringCG() {
         return "integer";
     }
+
+    @Override
+    public Type greaterType(Type type) {
+        if (type instanceof TypeDouble)
+            return type;
+        else
+            return this;
+    }
 }

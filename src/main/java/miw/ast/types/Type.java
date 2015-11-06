@@ -26,5 +26,6 @@ public interface Type extends ASTNode {
     // Suffix for code generation
     String suffix();
     String toStringCG();
+    Type greaterType(Type type);
 
 }

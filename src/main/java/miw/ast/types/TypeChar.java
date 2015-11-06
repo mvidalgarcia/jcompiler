@@ -112,7 +112,8 @@ public class TypeChar extends AbstractType implements Type {
         return "char";
     }
 
-    public Type mayorTipo(Type type) {
+    @Override
+    public Type greaterType(Type type) {
         if (type instanceof  TypeInteger || type instanceof TypeDouble)
             return type;
         return this;

@@ -2,10 +2,7 @@ package miw.codegeneration;
 
 import miw.ast.Program;
 import miw.ast.expressions.Expression;
-import miw.ast.statements.Assignment;
-import miw.ast.statements.Reading;
-import miw.ast.statements.Statement;
-import miw.ast.statements.Writing;
+import miw.ast.statements.*;
 import miw.ast.statements.definitions.Definition;
 import miw.ast.statements.definitions.FunctionDef;
 import miw.ast.statements.definitions.VariableDef;
@@ -19,9 +16,18 @@ import java.util.List;
  * Created by mvidalgarcia on 4/11/15.
  */
 public class ExecuteCGVisitor extends AbstractCGVisitor {
-    private CodeGenerator codeGen = new CodeGenerator();
-    private AddressCGVisitor addressCGVisitor = new AddressCGVisitor();
-    private ValueCGVisitor valueCGVisitor = new ValueCGVisitor();
+    private CodeGenerator codeGen;
+    private AddressCGVisitor addressCGVisitor;
+    private ValueCGVisitor valueCGVisitor;
+    private int count = 0;
+
+    public ExecuteCGVisitor() {
+        codeGen = new CodeGenerator();
+        addressCGVisitor = new AddressCGVisitor();
+        valueCGVisitor = new ValueCGVisitor();
+        addressCGVisitor.setValueCGVisitor(valueCGVisitor);
+        valueCGVisitor.setAddressCGVisitor(addressCGVisitor);
+    }
 
     @Override
     public Object visit(Program program, Object params) {
@@ -49,7 +55,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     }
 
     public Object visit(VariableDef variableDef, Object params) {
-        codeGen.varDefcomment(variableDef.getType(), variableDef.name, variableDef.offset);
+        codeGen.varDefComment(variableDef.getType(), variableDef.name, variableDef.offset);
         return null;
     }
 
@@ -79,7 +85,6 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         codeGen.emptyLine();
 
         for (Statement statement: statements) {
-            codeGen.line(statement.getLine());
             statement.accept(this, params);
             codeGen.emptyLine();
         }
@@ -89,6 +94,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     }
 
     public Object visit(Reading reading, Object params) {
+        codeGen.line(reading.getLine());
         codeGen.comment("Reading");
         for (Expression expression: reading.expressions) {
             expression.accept(addressCGVisitor, params);
@@ -99,6 +105,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     }
 
     public Object visit(Writing writing, Object params) {
+        codeGen.line(writing.getLine());
         codeGen.comment("Writing");
         for (Expression expression: writing.expressions) {
             expression.accept(valueCGVisitor, params);
@@ -108,11 +115,26 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     }
 
     public Object visit(Assignment assignment, Object params) {
+        codeGen.line(assignment.getLine());
         codeGen.comment("Assignment");
         assignment.leftExpression.accept(addressCGVisitor, params);
         assignment.rightExpression.accept(valueCGVisitor, params);
         codeGen.transformType(assignment.rightExpression.getType(), assignment.leftExpression.getType());
         codeGen.store(assignment.leftExpression.getType());
+        return null;
+    }
+
+    public Object visit(While whileStatement, Object params) {
+        codeGen.line(whileStatement.condition.getLine());
+        codeGen.comment("While");
+        int initCount = count;
+        codeGen.label("label" + initCount);
+        whileStatement.condition.accept(valueCGVisitor, params);
+        count++;
+        codeGen.jz("label" + count);
+        for (Statement statement: whileStatement.whileBody)
+            statement.accept(this, params);
+        codeGen.label("label" + count);
         return null;
     }
 

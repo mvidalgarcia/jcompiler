@@ -1,6 +1,11 @@
 /**
  * Test program.
  */
+
+double[10][5] v;
+double x;
+char z;
+
 void main() {
  int a,b;
  read b;

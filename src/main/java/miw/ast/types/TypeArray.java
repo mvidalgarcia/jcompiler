@@ -15,10 +15,24 @@ public class TypeArray extends AbstractType implements Type {
         this.size = size;
         this.type = type;
     }
-    // TODO: Invert array dimensions
-//    public static TypeArray newArray(Type type, Integer size) {
-//
-//    }
+
+    public static TypeArray newArray(Integer line, Integer column, Integer size, Type type) {
+        TypeArray array = null;
+        if (type instanceof TypeArray) {
+            array = (TypeArray) type;
+            Type newType = array.type;
+            while (newType instanceof TypeArray)
+                newType = ((TypeArray) newType).type;
+
+            array.type = new TypeArray(line, column, size, newType);
+
+        }
+        else {
+            array = new TypeArray(line, column, size, type);
+        }
+
+        return array;
+    }
 
     public Object accept(Visitor visitor, Object params) {
         return visitor.visit(this, params);

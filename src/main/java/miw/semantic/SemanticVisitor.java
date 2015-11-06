@@ -80,7 +80,7 @@ public class SemanticVisitor extends AbstractVisitor {
         super.visit(comparison, params);
         if (comparison.leftExpression.getType() != null && comparison.rightExpression.getType() != null)
             comparison.setType(comparison.leftExpression.getType().comparison(comparison.rightExpression.getType()));
-        if(comparison.getType() == null)
+        if (comparison.getType() == null)
             comparison.setType(new TypeError("Comparison operation \'" + comparison.operator
                     + "\' between \'" + comparison.leftExpression + "\' and \'" + comparison.rightExpression +
                     "\' cannot be performed.", comparison));
@@ -198,7 +198,7 @@ public class SemanticVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(While whileStatement, Object params) {
-        whileStatement.condition.accept(this, params);
+        super.visit(whileStatement, params);
         if (whileStatement.condition.getType() != null) {
             if (!whileStatement.condition.getType().isLogic())
                 whileStatement.condition.setType(new TypeError("'While' condition \'"+

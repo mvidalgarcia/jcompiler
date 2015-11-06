@@ -177,7 +177,8 @@ public class SemanticVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Return ret, Object params) {
-        ret.expression.accept(this, params);
+        super.visit(ret, params);
+        //ret.expression.accept(this, params);
         if (params != null) {
             if (!ret.expression.getType().promoteTo((Type) params)) // In params -> returnType
                 ret.expression.setType(new TypeError("Return type not compatible", ret));
@@ -187,7 +188,7 @@ public class SemanticVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(If ifStatement, Object params) {
-        ifStatement.condition.accept(this, params);
+        super.visit(ifStatement, params);
         if (ifStatement.condition.getType() != null) {
             if (!ifStatement.condition.getType().isLogic())
                 ifStatement.condition.setType(new TypeError("'If' condition \'"+

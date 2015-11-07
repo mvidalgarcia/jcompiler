@@ -13,10 +13,7 @@ import miw.ast.expressions.unary.UnaryMinus;
 import miw.ast.statements.*;
 import miw.ast.statements.definitions.FunctionDef;
 import miw.ast.statements.definitions.VariableDef;
-import miw.ast.types.Type;
-import miw.ast.types.TypeError;
-import miw.ast.types.TypeFunction;
-import miw.ast.types.TypeInteger;
+import miw.ast.types.*;
 import miw.visitor.AbstractVisitor;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
@@ -213,7 +210,7 @@ public class SemanticVisitor extends AbstractVisitor {
     public Object visit(FunctionDef functionDef, Object params) {
         super.visit(functionDef, params);
         /* Check all function definitions but main() */
-        if (!functionDef.name.equals("main")) {
+        if (!(((TypeFunction) functionDef.getType()).returnType instanceof TypeVoid)) {
 
             if (!((TypeFunction) functionDef.getType()).returnType.isBasicType())
                 functionDef.setType(new TypeError("Return type of function \'" + functionDef.name +

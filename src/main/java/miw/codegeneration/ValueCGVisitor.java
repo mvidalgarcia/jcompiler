@@ -13,6 +13,7 @@ import miw.ast.expressions.literals.LiteralInteger;
 import miw.ast.expressions.unary.Cast;
 import miw.ast.expressions.unary.Negation;
 import miw.ast.expressions.unary.UnaryMinus;
+import miw.ast.statements.InvocationStatement;
 import miw.ast.statements.Writing;
 import miw.ast.types.Type;
 import miw.ast.types.TypeDouble;
@@ -47,6 +48,18 @@ public class ValueCGVisitor extends AbstractCGVisitor {
             i++;
         }
         codeGen.functionCall(invocationExpression.function.name);
+        return null;
+    }
+
+    public Object visit(InvocationStatement invocationStatement, Object params) {
+        int i = 0;
+        for (Expression arg: invocationStatement.arguments) {
+            arg.accept(this, params);
+            codeGen.transformType(arg.getType(),
+                    ((TypeFunction)(invocationStatement.function.getType())).parameters.get(0).getType());
+            i++;
+        }
+        codeGen.functionCall(invocationStatement.function.name);
         return null;
     }
 

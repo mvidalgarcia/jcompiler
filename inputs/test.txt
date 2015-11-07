@@ -1,10 +1,11 @@
-int f(int a, int b) {
-    return -a*b;
+int f(double a, double b) {
+    return (int)(-a*b);
 }
 void main() {
     int a;
     double b;
     a = 3;
+    /* Function invocation as expression */
     b = f(a,'x');
     if (a)
         write a, b;

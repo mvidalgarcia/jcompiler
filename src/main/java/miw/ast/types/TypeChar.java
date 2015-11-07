@@ -116,6 +116,6 @@ public class TypeChar extends AbstractType implements Type {
     public Type greaterType(Type type) {
         if (type instanceof  TypeInteger || type instanceof TypeDouble)
             return type;
-        return this;
+        return TypeInteger.getInstance(type.getLine(), type.getColumn());
     }
 }

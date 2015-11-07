@@ -23,6 +23,13 @@ public class TypeFunction extends AbstractType implements Type {
         return visitor.visit(this, params);
     }
 
+    public int parametersSize() {
+        int total = 0;
+        for (VariableDef vd: this.parameters)
+            total += vd.getType().size();
+        return total;
+    }
+
     @Override
     public Type functionInvocation(List<Expression> expressions) {
         if (expressions.size() != this.parameters.size())

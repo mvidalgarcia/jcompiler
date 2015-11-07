@@ -46,6 +46,10 @@ public class CodeGenerator {
         write("\tpusha\t" + address);
     }
 
+    public void pop(Type type) {
+        write("\tpop" + type.suffix());
+    }
+
     public void load(Type type) {
         write("\tload" + type.suffix());
     }

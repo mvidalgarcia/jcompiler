@@ -6,7 +6,9 @@ import miw.ast.statements.*;
 import miw.ast.statements.definitions.Definition;
 import miw.ast.statements.definitions.FunctionDef;
 import miw.ast.statements.definitions.VariableDef;
+import miw.ast.types.Type;
 import miw.ast.types.TypeFunction;
+import miw.ast.types.TypeVoid;
 import miw.visitor.AbstractCGVisitor;
 
 import java.util.ArrayList;
@@ -54,43 +56,16 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         return null;
     }
 
-    public Object visit(VariableDef variableDef, Object params) {
-        codeGen.varDefComment(variableDef.getType(), variableDef.name, variableDef.offset);
-        return null;
-    }
 
-    public Object visit(FunctionDef functionDef, Object params) {
-        // Gets accurate line through first statement line of function - 1
-        codeGen.line(functionDef.statements.get(0).getLine()-1);
-        codeGen.emptyLine();
-        codeGen.label(functionDef.getName());
+    /* --- Statements --- */
 
-        int bytesParams = 0;
-        codeGen.comment("Parameters");
-        for (VariableDef vd: ((TypeFunction)functionDef.getType()).parameters){
-            bytesParams += vd.getType().size();
-            vd.accept(this, params);
-        }
-
-        codeGen.comment("Local variables");
-        // Stores all statements but variable definitions
-        List<Statement> statements = new ArrayList<Statement>();
-        for (Statement statement: functionDef.statements) {
-            if (statement instanceof VariableDef)
-                statement.accept(this, params);
-            else
-                statements.add(statement);
-        }
-
-        codeGen.enter(functionDef.localVariablesOffset);
-        codeGen.emptyLine();
-
-        for (Statement statement: statements) {
-            statement.accept(this, params);
-            codeGen.emptyLine();
-        }
-
-        codeGen.ret(functionDef.getType().size(), functionDef.localVariablesOffset, bytesParams);
+    public Object visit(InvocationStatement invocationStatement, Object params) {
+        codeGen.line(invocationStatement.getLine());
+        codeGen.comment("Statement Invocation");
+        invocationStatement.accept(valueCGVisitor, params);
+        TypeFunction tf = ((TypeFunction)(invocationStatement.function.getType()));
+        if (!( tf.returnType instanceof TypeVoid ))
+            codeGen.pop(tf.returnType);
         return null;
     }
 
@@ -167,6 +142,59 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         }
         return null;
 
+    }
+
+    public Object visit(Return returnStatement, Object params) {
+        codeGen.line(returnStatement.getLine());
+        FunctionDef fd = (FunctionDef) params;
+        codeGen.comment("Return");
+        returnStatement.expression.accept(valueCGVisitor, params);
+        codeGen.transformType(returnStatement.expression.getType(), ((TypeFunction) fd.type).returnType);
+        //codeGen.ret(returnStatement.expression.getType().size(),fd.localVariablesOffset, ((TypeFunction) fd.getType()).parametersSize());
+        return null;
+    }
+
+    /* Statements -> Definitions */
+
+    public Object visit(VariableDef variableDef, Object params) {
+        codeGen.varDefComment(variableDef.getType(), variableDef.name, variableDef.offset);
+        return null;
+    }
+
+    public Object visit(FunctionDef functionDef, Object params) {
+        // Gets accurate line through first statement line of function - 1
+        codeGen.line(functionDef.statements.get(0).getLine()-1);
+        codeGen.emptyLine();
+        codeGen.label(functionDef.getName());
+
+        int bytesParams = 0;
+        codeGen.comment("Parameters");
+        for (VariableDef vd: ((TypeFunction)functionDef.getType()).parameters){
+            bytesParams += vd.getType().size();
+            vd.accept(this, params);
+        }
+
+        codeGen.comment("Local variables");
+        // Stores all statements but variable definitions
+        List<Statement> statements = new ArrayList<Statement>();
+        for (Statement statement: functionDef.statements) {
+            if (statement instanceof VariableDef)
+                statement.accept(this, params);
+            else
+                statements.add(statement);
+        }
+
+        codeGen.enter(functionDef.localVariablesOffset);
+        codeGen.emptyLine();
+
+        for (Statement statement: statements) {
+            // Function def as params, it'll be used in Return
+            statement.accept(this, functionDef);
+            codeGen.emptyLine();
+        }
+
+        codeGen.ret( ((TypeFunction)functionDef.type).returnType.size(), functionDef.localVariablesOffset, bytesParams);
+        return null;
     }
 
 }

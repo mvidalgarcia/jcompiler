@@ -1,12 +1,11 @@
+int f(int a, int b) {
+    return -a*b;
+}
 void main() {
-    int a,b;
-    if (3 < 4)
-        write 'c';
-    else
-        write 'a';
-
-    if (3*3) {
-        a = 3 % 2;
-    }
-
+    int a;
+    double b;
+    a = 3;
+    b = f(a,'x');
+    if (a)
+        write a, b;
 }

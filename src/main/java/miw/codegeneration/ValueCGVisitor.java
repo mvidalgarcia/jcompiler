@@ -2,6 +2,7 @@ package miw.codegeneration;
 
 import miw.ast.expressions.Expression;
 import miw.ast.expressions.Identifier;
+import miw.ast.expressions.InvocationExpression;
 import miw.ast.expressions.binary.Arithmetic;
 import miw.ast.expressions.binary.ArrayAccess;
 import miw.ast.expressions.binary.Comparison;
@@ -10,9 +11,12 @@ import miw.ast.expressions.literals.LiteralCharacter;
 import miw.ast.expressions.literals.LiteralDouble;
 import miw.ast.expressions.literals.LiteralInteger;
 import miw.ast.expressions.unary.Cast;
+import miw.ast.expressions.unary.Negation;
 import miw.ast.expressions.unary.UnaryMinus;
 import miw.ast.statements.Writing;
 import miw.ast.types.Type;
+import miw.ast.types.TypeDouble;
+import miw.ast.types.TypeFunction;
 import miw.visitor.AbstractCGVisitor;
 
 /**
@@ -31,6 +35,18 @@ public class ValueCGVisitor extends AbstractCGVisitor {
     public Object visit(Identifier identifier, Object params) {
         identifier.accept(addressCGVisitor, params);
         codeGen.load(identifier.getType());
+        return null;
+    }
+
+    public Object visit(InvocationExpression invocationExpression, Object params) {
+        int i = 0;
+        for (Expression arg: invocationExpression.arguments) {
+            arg.accept(this, params);
+            codeGen.transformType(arg.getType(),
+                    ((TypeFunction)(invocationExpression.function.getType())).parameters.get(0).getType());
+            i++;
+        }
+        codeGen.functionCall(invocationExpression.function.name);
         return null;
     }
 
@@ -76,10 +92,19 @@ public class ValueCGVisitor extends AbstractCGVisitor {
     /* Expressions -> Unary */
 
     public Object visit(UnaryMinus unaryMinus, Object params) {
-        /*
-         * push 0
-         * gc.convertirA(tipoEntero.Getinstace, um.gettipo)
-         */
+        unaryMinus.expression.accept(this, params);
+        if (unaryMinus.expression.getType() instanceof TypeDouble)
+            codeGen.push(0.0);
+        else
+            codeGen.push(0);
+        codeGen.transformType(unaryMinus.expression.getType(), unaryMinus.getType());
+        codeGen.sub(unaryMinus.getType());
+        return null;
+    }
+
+    public Object visit(Negation negation, Object params) {
+        negation.expression.accept(this, params);
+        codeGen.not();
         return null;
     }
 

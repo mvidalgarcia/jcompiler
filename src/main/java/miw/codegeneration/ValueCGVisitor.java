@@ -92,11 +92,11 @@ public class ValueCGVisitor extends AbstractCGVisitor {
     /* Expressions -> Unary */
 
     public Object visit(UnaryMinus unaryMinus, Object params) {
-        unaryMinus.expression.accept(this, params);
         if (unaryMinus.expression.getType() instanceof TypeDouble)
             codeGen.push(0.0);
         else
             codeGen.push(0);
+        unaryMinus.expression.accept(this, params);
         codeGen.transformType(unaryMinus.expression.getType(), unaryMinus.getType());
         codeGen.sub(unaryMinus.getType());
         return null;

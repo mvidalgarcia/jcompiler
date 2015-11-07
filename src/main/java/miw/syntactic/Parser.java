@@ -881,11 +881,11 @@ case 16:
 break;
 case 17:
 //#line 109 "../src/main/java/miw/syntactic/syntactic.y"
-{ yyval = new TypeArray(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(1), (Type) val_peek(3)); }
+{ yyval = TypeArray.newArray(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(1), (Type) val_peek(3)); }
 break;
 case 18:
 //#line 110 "../src/main/java/miw/syntactic/syntactic.y"
-{ yyval = new TypeArray(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(1), (Type) val_peek(3)); }
+{ yyval = TypeArray.newArray(lexico.getLine(), lexico.getColumn(), (Integer) val_peek(1), (Type) val_peek(3)); }
 break;
 case 19:
 //#line 113 "../src/main/java/miw/syntactic/syntactic.y"

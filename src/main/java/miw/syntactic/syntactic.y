@@ -106,8 +106,8 @@ simple_type:     INT { $$ = TypeInteger.getInstance(lexico.getLine(), lexico.get
         | DOUBLE { $$ = TypeDouble.getInstance(lexico.getLine(), lexico.getColumn());}
         ;
 
-array_type: simple_type '['CTE_INTEGER']' { $$ = new TypeArray(lexico.getLine(), lexico.getColumn(), (Integer) $3, (Type) $1); }
-          | array_type '['CTE_INTEGER']'  { $$ = new TypeArray(lexico.getLine(), lexico.getColumn(), (Integer) $3, (Type) $1); }
+array_type: simple_type '['CTE_INTEGER']' { $$ = TypeArray.newArray(lexico.getLine(), lexico.getColumn(), (Integer) $3, (Type) $1); }
+          | array_type '['CTE_INTEGER']'  { $$ = TypeArray.newArray(lexico.getLine(), lexico.getColumn(), (Integer) $3, (Type) $1); }
           ;
 
 void_type: VOID { $$ = TypeVoid.getInstance(lexico.getLine(), lexico.getColumn());}

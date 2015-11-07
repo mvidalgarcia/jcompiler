@@ -1,18 +1,26 @@
 void f(double a, char b) {
     double [3] v;
-    v[0] = (int)-32e23;
-    if (b != 'd')
+    v[0] = -32e23;
+    /* Nested if-else */
+    if (b == 'd')
         write a;
     else if (b == 'x')
-            write v[0];
+            write v[0], '\n';
+}
+
+char charAdd(char a, char b) {
+    /* Casting */
+    return (char)(a+b);
 }
 
 void main() {
     int a;
-    double b;
+    char b;
     a = 3;
     /* Function invocation as statement */
     f(a,'x');
+    /* Function invocation as expression */
+    b = charAdd('%', '#');
     if (a)
         write a, '\n', b;
 }

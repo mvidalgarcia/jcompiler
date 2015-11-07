@@ -56,7 +56,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         for (Expression arg: invocationStatement.arguments) {
             arg.accept(this, params);
             codeGen.transformType(arg.getType(),
-                    ((TypeFunction)(invocationStatement.function.getType())).parameters.get(0).getType());
+                    ((TypeFunction)(invocationStatement.function.getType())).parameters.get(i).getType());
             i++;
         }
         codeGen.functionCall(invocationStatement.function.name);

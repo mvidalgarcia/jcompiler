@@ -129,16 +129,17 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
             statement.accept(this, params);
         count++;
 
-        if (ifStatement.elseBody != null)
-            codeGen.jmp("label" + count);
+        if (ifStatement.elseBody != null) {
+            codeGen.jmp("label" + (initCount + 1));
+            count++;
+        }
 
         codeGen.label("label" + initCount);
         if (ifStatement.elseBody != null) {
             codeGen.comment("Else body");
             for (Statement statement : ifStatement.elseBody)
                 statement.accept(this, params);
-            codeGen.label("label" + count);
-            count++;
+            codeGen.label("label" + (initCount + 1));
         }
         return null;
 

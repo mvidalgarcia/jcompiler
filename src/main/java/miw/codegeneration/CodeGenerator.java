@@ -5,6 +5,7 @@ import miw.ast.types.TypeArray;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 
 /**
  * Created by mvidalgarcia on 4/11/15.
@@ -39,7 +40,7 @@ public class CodeGenerator {
     }
 
     public void push(double d) {
-        write("\tpushf\t" + d);
+        write("\tpushf\t" + new BigDecimal(d).toPlainString()); //Prevent E notation (ex: 3e3)
     }
 
     public void pusha(int address) {
@@ -283,6 +284,6 @@ public class CodeGenerator {
         write("\tf2i");
     }
     private void i2b() {
-        write("\tb2i");
+        write("\ti2b");
     }
 }

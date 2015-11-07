@@ -60,7 +60,8 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     }
 
     public Object visit(FunctionDef functionDef, Object params) {
-        codeGen.line(functionDef.line);
+        // Gets accurate line through first statement line of function - 1
+        codeGen.line(functionDef.statements.get(0).getLine()-1);
         codeGen.emptyLine();
         codeGen.label(functionDef.getName());
 
@@ -130,14 +131,42 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         int initCount = count;
         codeGen.label("label" + initCount);
         whileStatement.condition.accept(valueCGVisitor, params);
-        count++;
-        codeGen.jz("label" + count);
-        for (Statement statement: whileStatement.whileBody)
+
+        codeGen.jz("label" + (initCount + 1));
+        count = count + 2; // Two labels used
+        for (Statement statement: whileStatement.whileBody) {
+            codeGen.emptyLine();
             statement.accept(this, params);
-        codeGen.label("label" + count);
+        }
+        codeGen.jmp("label" + initCount);
+        codeGen.label("label" + (initCount + 1));
         return null;
     }
 
+    public Object visit(If ifStatement, Object params) {
+        codeGen.line(ifStatement.condition.getLine());
+        codeGen.comment("If");
+        int initCount = count;
+        ifStatement.condition.accept(valueCGVisitor, params);
+        codeGen.jz("label" + initCount);
+        codeGen.comment("If body");
+        for (Statement statement: ifStatement.ifBody)
+            statement.accept(this, params);
+        count++;
 
+        if (ifStatement.elseBody != null)
+            codeGen.jmp("label" + count);
+
+        codeGen.label("label" + initCount);
+        if (ifStatement.elseBody != null) {
+            codeGen.comment("Else body");
+            for (Statement statement : ifStatement.elseBody)
+                statement.accept(this, params);
+            codeGen.label("label" + count);
+            count++;
+        }
+        return null;
+
+    }
 
 }

@@ -138,6 +138,10 @@ public class CodeGenerator {
         write("\tjz\t" + label);
     }
 
+    public void jmp(String label) {
+        write("\tjmp\t" + label);
+    }
+
     public void label(String label) {
         write(" " + label + ":");
     }

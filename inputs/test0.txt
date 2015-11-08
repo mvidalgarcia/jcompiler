@@ -23,9 +23,11 @@ void printArray() {
     array[1][5] = 'l';
 
     i = 0;
+    /* Nested whiles */
     while (i < i_max) {
         j = 0;
         while (j < j_max) {
+            /* Array access */
             write array[i][j];
             j = j + 1;
         }

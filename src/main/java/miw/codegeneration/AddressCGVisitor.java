@@ -12,11 +12,15 @@ import miw.visitor.AbstractCGVisitor;
  * Created by mvidalgarcia on 4/11/15.
  */
 public class AddressCGVisitor extends AbstractCGVisitor {
-    private CodeGenerator codeGen = new CodeGenerator();
+    private CodeGenerator codeGen;
     private ValueCGVisitor valueCGVisitor;
 
     public void setValueCGVisitor (ValueCGVisitor v) {
         this.valueCGVisitor = v;
+    }
+
+    public void setCodeGen (CodeGenerator cg) {
+        this.codeGen = cg;
     }
 
     public Object visit(Identifier identifier, Object params) {

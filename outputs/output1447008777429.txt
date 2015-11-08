@@ -1,0 +1,169 @@
+#source	"inputs/test1.txt"
+
+	' * Global variables
+
+call main
+halt
+
+#line	1
+
+ f:
+	' * Parameters
+	' * double a (offset 5)
+	' * char b (offset 4)
+	' * Local variables
+	' * [3,double] v (offset -12)
+	enter	12
+
+#line	3
+	' * Assignment
+	push	bp
+	pushi	-12
+	addi
+	pushi	0
+	pushi	4
+	muli
+	addi
+	pushf	0
+	pushf	3199999999999999731564544
+	subf
+	storef
+
+#line	5
+	' * If
+	push	bp
+	pushi	4
+	addi
+	loadb
+	b2i
+	pushb	100
+	b2i
+	eqi
+	jz	label0
+	' * If body
+#line	6
+	' * Writing
+	push	bp
+	pushi	5
+	addi
+	loadf
+	outf
+	jmp	label1
+ label0:
+	' * Else body
+#line	7
+	' * If
+	push	bp
+	pushi	4
+	addi
+	loadb
+	b2i
+	pushb	120
+	b2i
+	eqi
+	jz	label2
+	' * If body
+#line	8
+	' * Writing
+	push	bp
+	pushi	-12
+	addi
+	pushi	0
+	pushi	4
+	muli
+	addi
+	loadf
+	outf
+	pushb	10
+	outb
+ label2:
+ label1:
+
+	ret	0, 12, 5
+#line	12
+
+ charAdd:
+	' * Parameters
+	' * char a (offset 5)
+	' * char b (offset 4)
+	' * Local variables
+	enter	0
+
+#line	13
+	' * Return
+	push	bp
+	pushi	5
+	addi
+	loadb
+	b2i
+	push	bp
+	pushi	4
+	addi
+	loadb
+	b2i
+	addi
+	i2b
+
+	ret	1, 0, 2
+#line	16
+
+ main:
+	' * Parameters
+	' * Local variables
+	' * integer a (offset -2)
+	' * char b (offset -3)
+	enter	3
+
+#line	19
+	' * Assignment
+	push	bp
+	pushi	-2
+	addi
+	pushi	3
+	storei
+
+#line	21
+	' * Statement Invocation
+	push	bp
+	pushi	-2
+	addi
+	loadi
+	i2f
+	pushb	120
+	call	f
+
+#line	23
+	' * Assignment
+	push	bp
+	pushi	-3
+	addi
+	pushb	37
+	pushb	35
+	call	charAdd
+	storeb
+
+#line	24
+	' * If
+	push	bp
+	pushi	-2
+	addi
+	loadi
+	jz	label3
+	' * If body
+#line	25
+	' * Writing
+	push	bp
+	pushi	-2
+	addi
+	loadi
+	outi
+	pushb	10
+	outb
+	push	bp
+	pushi	-3
+	addi
+	loadb
+	outb
+ label3:
+
+	ret	0, 3, 0

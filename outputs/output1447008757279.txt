@@ -1,0 +1,302 @@
+#source	"inputs/test0.txt"
+
+	' * Global variables
+	' * integer i_max (offset 0)
+	' * integer j_max (offset 2)
+	' * [2,[6,char] array (offset 4)] 
+
+call main
+halt
+
+#line	5
+
+ printArray:
+	' * Parameters
+	' * Local variables
+	' * integer i (offset -2)
+	' * integer j (offset -4)
+	enter	4
+
+#line	8
+	' * Assignment
+	pusha	0
+	pushi	2
+	storei
+
+#line	9
+	' * Assignment
+	pusha	2
+	pushi	6
+	storei
+
+#line	11
+	' * Assignment
+	pusha	4
+	pushi	0
+	pushi	6
+	muli
+	addi
+	pushi	0
+	pushi	1
+	muli
+	addi
+	pushb	104
+	storeb
+
+#line	12
+	' * Assignment
+	pusha	4
+	pushi	0
+	pushi	6
+	muli
+	addi
+	pushi	1
+	pushi	1
+	muli
+	addi
+	pushb	101
+	storeb
+
+#line	13
+	' * Assignment
+	pusha	4
+	pushi	0
+	pushi	6
+	muli
+	addi
+	pushi	2
+	pushi	1
+	muli
+	addi
+	pushb	108
+	storeb
+
+#line	14
+	' * Assignment
+	pusha	4
+	pushi	0
+	pushi	6
+	muli
+	addi
+	pushi	3
+	pushi	1
+	muli
+	addi
+	pushb	108
+	storeb
+
+#line	15
+	' * Assignment
+	pusha	4
+	pushi	0
+	pushi	6
+	muli
+	addi
+	pushi	4
+	pushi	1
+	muli
+	addi
+	pushb	111
+	storeb
+
+#line	16
+	' * Assignment
+	pusha	4
+	pushi	0
+	pushi	6
+	muli
+	addi
+	pushi	5
+	pushi	1
+	muli
+	addi
+	pushb	10
+	storeb
+
+#line	18
+	' * Assignment
+	pusha	4
+	pushi	1
+	pushi	6
+	muli
+	addi
+	pushi	0
+	pushi	1
+	muli
+	addi
+	pushb	109
+	storeb
+
+#line	19
+	' * Assignment
+	pusha	4
+	pushi	1
+	pushi	6
+	muli
+	addi
+	pushi	1
+	pushi	1
+	muli
+	addi
+	pushb	105
+	storeb
+
+#line	20
+	' * Assignment
+	pusha	4
+	pushi	1
+	pushi	6
+	muli
+	addi
+	pushi	2
+	pushi	1
+	muli
+	addi
+	pushb	103
+	storeb
+
+#line	21
+	' * Assignment
+	pusha	4
+	pushi	1
+	pushi	6
+	muli
+	addi
+	pushi	3
+	pushi	1
+	muli
+	addi
+	pushb	117
+	storeb
+
+#line	22
+	' * Assignment
+	pusha	4
+	pushi	1
+	pushi	6
+	muli
+	addi
+	pushi	4
+	pushi	1
+	muli
+	addi
+	pushb	101
+	storeb
+
+#line	23
+	' * Assignment
+	pusha	4
+	pushi	1
+	pushi	6
+	muli
+	addi
+	pushi	5
+	pushi	1
+	muli
+	addi
+	pushb	108
+	storeb
+
+#line	25
+	' * Assignment
+	push	bp
+	pushi	-2
+	addi
+	pushi	0
+	storei
+
+#line	27
+	' * While
+ label0:
+	push	bp
+	pushi	-2
+	addi
+	loadi
+	pusha	0
+	loadi
+	lti
+	jz	label1
+
+#line	28
+	' * Assignment
+	push	bp
+	pushi	-4
+	addi
+	pushi	0
+	storei
+
+#line	29
+	' * While
+ label2:
+	push	bp
+	pushi	-4
+	addi
+	loadi
+	pusha	2
+	loadi
+	lti
+	jz	label3
+
+#line	31
+	' * Writing
+	pusha	4
+	push	bp
+	pushi	-2
+	addi
+	loadi
+	pushi	6
+	muli
+	addi
+	push	bp
+	pushi	-4
+	addi
+	loadi
+	pushi	1
+	muli
+	addi
+	loadb
+	outb
+
+#line	32
+	' * Assignment
+	push	bp
+	pushi	-4
+	addi
+	push	bp
+	pushi	-4
+	addi
+	loadi
+	pushi	1
+	addi
+	storei
+	jmp	label2
+ label3:
+
+#line	34
+	' * Assignment
+	push	bp
+	pushi	-2
+	addi
+	push	bp
+	pushi	-2
+	addi
+	loadi
+	pushi	1
+	addi
+	storei
+	jmp	label0
+ label1:
+
+	ret	0, 4, 0
+#line	37
+
+ main:
+	' * Parameters
+	' * Local variables
+	enter	0
+
+#line	38
+	' * Statement Invocation
+	call	printArray
+
+	ret	0, 0, 0

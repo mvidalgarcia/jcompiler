@@ -49,7 +49,7 @@ public class Main {
 
         if (!ErrorHandler.getInstance().areErrors()) {
             parser.ast.accept(new OffsetVisitor(), null);
-            parser.ast.accept(new ExecuteCGVisitor(), args[0]);
+            parser.ast.accept(new ExecuteCGVisitor("output" + System.currentTimeMillis() + ".txt"), args[0]);
         }
 
         /* Print all errors */

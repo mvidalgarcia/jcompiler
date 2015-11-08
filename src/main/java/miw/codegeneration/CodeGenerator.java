@@ -3,6 +3,8 @@ package miw.codegeneration;
 import miw.ast.types.Type;
 import miw.ast.types.TypeArray;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -11,11 +13,20 @@ import java.math.BigDecimal;
  * Created by mvidalgarcia on 4/11/15.
  */
 public class CodeGenerator {
-    //public PrintWriter out;
-    public static PrintStream out;
+    public PrintWriter printWriter;
+
+    public CodeGenerator(String outputFileName) {
+        File outputFile = new File("outputs/" + outputFileName);
+        try {
+            printWriter = new PrintWriter(outputFile);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     private void write(String s) {
-        System.out.println(s);
+        printWriter.println(s);
     }
 
     public void main() {

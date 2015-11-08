@@ -23,12 +23,14 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     private ValueCGVisitor valueCGVisitor;
     private int count = 0;
 
-    public ExecuteCGVisitor() {
-        codeGen = new CodeGenerator();
+    public ExecuteCGVisitor(String outputFileName) {
+        codeGen = new CodeGenerator(outputFileName);
         addressCGVisitor = new AddressCGVisitor();
         valueCGVisitor = new ValueCGVisitor();
         addressCGVisitor.setValueCGVisitor(valueCGVisitor);
+        addressCGVisitor.setCodeGen(codeGen);
         valueCGVisitor.setAddressCGVisitor(addressCGVisitor);
+        valueCGVisitor.setCodeGen(codeGen);
     }
 
     @Override
@@ -53,6 +55,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         for (Definition definition: functionDefinitions)
             definition.accept(this, params);
 
+        codeGen.printWriter.close();
         return null;
     }
 
